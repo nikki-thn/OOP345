@@ -5,10 +5,3 @@
 using namespace std;
 using namespace w1;
 
-void toProcess(const char* string, int max) {
-
-	CString aString(string, max);
-
-	cout << aString;
-	
-}
