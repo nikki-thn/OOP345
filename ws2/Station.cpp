@@ -1,43 +1,78 @@
 #include <iostream>
-#include"CString.h"
+#include <string>
+#include"Station.h"
 
-int maxChars;
 using namespace std;
 
-namespace w1 {
+namespace w2 {
 
-	CString::CString() {
-		m_numOfChars = 0;
-		m_string = nullptr;
+	Station::Station() : m_stationName (" "), m_numAdultPass(0), m_numStudentPass(0) {
+		cout << "Constructor\n";
+	}
+	
+	Station::~Station() {
+		cout << "Destructor\n";
 	}
 
-	CString::CString(const char* cs, int max) {
+	void Station::set(const std::string& stationName, unsigned numAdultPass, unsigned numStudentPass) {
+	
+		if (!stationName.empty()) {
 
-	//	cout << "Constructor" << endl;
-		if (cs != nullptr) {
-			m_numOfChars = max;
-			maxChars = m_numOfChars;
-			m_string = new char[m_numOfChars + 1];
-			strncpy(m_string, cs, m_numOfChars);
+			m_stationName = stationName;
+			m_numAdultPass = numAdultPass;
+			m_numStudentPass = numStudentPass;
 		}
-		else {
-			*this = CString();
-		}
 	}
 
-	CString::~CString() {
-	//	cout << "Destructor" << endl;
-		delete[] m_string;
-	}
+	void Station::update(PassType pass, int numPass) {
 
-	void CString::display(std::ostream& os) const {
-		std::cout << m_string << std::endl;
-	}
+		if (pass == Student) {
 
-	std::ostream& operator<< (std::ostream& os, const CString& cs) {
+	
+				m_numStudentPass += numPass;
 		
-		cs.display(os);
-		return os;
-}
 
+		}
+		else if (pass == Adult){
+
+		/*	if (numPass >= 0) {*/
+				m_numAdultPass += numPass;
+			
+		/*	else {
+				m_numAdultPass -= (-1)*numPass;
+			}*/
+		}
+	}
+
+	unsigned Station::inStock(PassType pass) const {
+
+		unsigned numPass = 0;
+
+		if (pass == Student) {
+			numPass = m_numStudentPass;
+		}
+		else if (pass == Adult) {
+			numPass = m_numAdultPass;
+		}
+		return numPass;
+	}
+
+	const std::string& Station::getName() const {
+
+		return m_stationName;
+	}
+
+	void Station::display() const {
+
+		
+		cout.setf(ios::left);
+
+		cout.width(17);
+		cout << m_stationName;
+		cout.unsetf(ios::left);
+		cout.width(8);
+		cout << m_numAdultPass;
+		cout.width(6);
+		cout << m_numStudentPass << endl;
+	}
 }
