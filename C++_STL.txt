@@ -1,0 +1,4 @@
+int numCount = count(begin(v), end(v), valueToFind) //takes 3 parameters: starting point, ending point, value we want to find 
+
+The difference between v.begin() - member function and begin(v) - nonmember function: begin(v) WORKS with C-type arrays as well. We can also implement out own begin() for a collection without member begin(). Use begin() as a safe habit
+
