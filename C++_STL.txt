@@ -1,10 +1,39 @@
-Using COUNT to count the occurence of a particular value:
-Ex: int numCount = count(begin(v), end(v), valueToFind) //takes 3 parameters: starting point, ending point, value we want to find 
+-----===== COUNTING / FINDING =====-----
+
+Using COUNT/FIND to count the occurence of a particular value or to find a value:
+Ex: int numCount = count(begin(v), end(v), valueToCount) //takes 3 parameters: starting point, ending point, value we want to count 
+    auto numFind = find(begin(v), end(v), valueToFind) //find a value (will show the value, but the result store as an iterator
+    int value = *numFind;            // to see value, we need to dereference it
+    int numCount2 = find(numFind, end(v), valueToFind) //find same value but starting from numFind - an iterator
 
 The difference between v.begin() - member function and begin(v) - nonmember function: begin(v) WORKS with C-type arrays as well. We can also implement out own begin() for a collection without member begin(). Use begin() as a safe habit.
 
 Likely, we will want to count with a condition, not just a value. We can do that with COUNT_IF by using lambda for use in the third parameter:
 Ex: int numOdds = count_if (begin(v), end(v), [ ] (auto elem) { return elem % 2 != 0 } ); //to count odds element in a collection
 *** sometime we need helper functions to help with count_if third parameter. check sandbox/count_if_class_member.cpp
+
+ALL_OF - NONE_OF - ANY_OF : returns a boolean value of the count_if statement
+Ex: bool allof = all_of(begin(v), end(v), [ ](auto elem) { return elem % 2 != 0; }); //return true if all element in collection are odds
+
+FIND_IF // return the iterator at the first value that satisfy condition 
+FIND_IF_NOT //opposite of FIND_IF
+FIND FIRST_OF //pass in 2 things or a whole collection and returns whichever if found first, sort of like 2 FIND_IF
+SEARCH //look for a number of sequence, for example, look for 1 follows by 3 (NOT 13)
+FIND_END //exactly like SEARCH, but it gives the iterator at last occurence rather than first
+SEARCH_N //looks for a consecutive occurence of a value (ex: four 1s, three 4s, five 7s, etc) 
+ADJACENT_FIND //return first iterator when two adjacent elements or more have same value ( could be   1,1,1   2,2  5,5,5,5)
+
+-----===== SORTING / SHUFFLING =====-----
+//Example in sandbox/sorting.cpp
+SORT a collection, need operload operator<, ex: sort ( begin(v), end(v), lambda (usually overload operator<) )
+PARTIAL_SORT(): to partial sort a collection
+IS_SORTED_UNTIL(): return iterator upto the last index that its value is sorted
+PARTIAL_SORT_COPY(): sort and copy to another collection
+
+MAX_ELEMENT() / MIN_ELEMENT() : return VALUE of largest and smallest value in collection, use operload operator<
+
+upper_bound() / lower_bound(): return ITERATOR, only works on SORTED collection. Upper_bound finds the first element that is GREATER than the value you pass in (if pass in 5, it will look for 6, 7 ,etc which ever larger is available in your collection). Lower_bound find the first that is NOT LESS than (ex, if pass in 5, it will returns 5 or 6 (equal rather than greater)
+
+To SHUFFLE we need to include the random header, just google when you need to use it: shuffle (begin(v), end(v), randomGenerator)
 
 
