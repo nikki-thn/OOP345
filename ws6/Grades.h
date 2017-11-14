@@ -9,6 +9,7 @@ class Grades {
 	int* m_studentID;
 	char* m_fileName;
 	int m_numRecs;
+	
 public:
 
 	Grades(const char* fileName) {
