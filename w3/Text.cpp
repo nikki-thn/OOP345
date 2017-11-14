@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <algorithm>
-#include <vector>
 #include"Text.h"
 
 using namespace std;
