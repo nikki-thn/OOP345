@@ -45,6 +45,8 @@ ACCUMULATE(): using operator+ or using lambda
 
 -----===== COPYING / MOVING =====-----
 
+File: sandbox/copying_removing_filling.cpp
+
 Use operator= to copy a whole collection fro  one to aother or use copy() // to copy a range of value to a new collection
 copy_if(): copy if certain conditions are met
 copy_n(): decided a head of time how many to copy
@@ -53,6 +55,19 @@ copy_backward(): copy within the same collection to avoid overlap, it's operated
 MOVE() / MOVE_BACKWARD(): just like copy, except this to use when the collections are not copyable (copies are restricted etc)
 
 REMOVE() / REMOVE_IF(): remove a specific value in a collection (for example, remove 3 doensèt matter how many times it occurs)
+
+CREATE()
+
+FILL() / FILL_N() : to fill a value to a whole collection, or fill same valu for a number of time using fill_n()
+
+IOTA(): Greek words mean small amount. Helps us to do fill but with a small changes one at a time (for example, fill the collection with increment i += 5 for each element
+
+GENERATE() / GENERATE_N(): just like iota() but allows lambda, so we can go crazy at whatever to fill our collection
+
+REPLACE() / REPLACE_IF(): find and replace a value - the IF version is with lambda 
+
+UNIQUE() / UNIQUE_COPY(): only works on SORTED collection - remove adjacent duplicate values in a collection, just like remove(), unique() return a newend (new size) if 
+
 
 
 
