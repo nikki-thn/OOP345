@@ -21,12 +21,15 @@ int main(int argc, char* argv[]) {
 		return 2;
 	}
 
+	//w3::Text b(argv[1]);
+	//
+	//b.display();
 
 	std::clock_t cs, ce;
 	{
 		std::cout << std::fixed << std::setprecision(3);
 		cs = std::clock();
-		Text a;
+		w3::Text a;
 		ce = std::clock();
 		std::cout << "Constructor      " << TIME(cs, ce) << " seconds";
 		std::cout << " - a.size = " << a.size() << std::endl;
@@ -54,7 +57,7 @@ int main(int argc, char* argv[]) {
 		ce = std::clock();
 		std::cout << "Copy Constructor " << TIME(cs, ce) << " seconds";
 		std::cout << " - c.size = " << c.size() << std::endl;
-
+	
 		cs = std::clock();
 		w3::Text d = std::move(a);
 		ce = std::clock();
