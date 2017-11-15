@@ -42,9 +42,15 @@ namespace w7 {
 
 		std::cout << "Product No     Cost Taxable" << std::endl;
 
+		double total = 0;
 		for (auto i: m_products) {
 			i->display(os);
+			total += i->getCharge();
 		}
+
+		std::cout.precision(4);
+		std::cout << "     Total    " << total << std::endl;
+
 	}
 
 

@@ -14,10 +14,10 @@ namespace w7 {
 		double total;
 
 		if (m_taxRate == 'H') {
-			total = m_price * 1.13;
+			total = m_price * 1.130000000;
 		}
 		else if (m_taxRate == 'P') {
-			total = m_price * 1.08;
+			total = m_price * 1.080000000;
 		}
 		return total;
 	}
@@ -27,7 +27,11 @@ namespace w7 {
 		os << m_productNum;
 		os.width(10);
 		os.precision(4);
-		os << m_price << " " << m_taxRate << std::endl;
+		os << m_price;
+
+		if (m_taxRate == 'H') os << " HST \n";
+		else if (m_taxRate == 'P') os << " PST \n";
+	
 	}
 
 	iProduct* readProduct(std::ifstream& ifs) {
