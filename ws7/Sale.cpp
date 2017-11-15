@@ -48,7 +48,7 @@ namespace w7 {
 			total += i->getCharge();
 		}
 
-		std::cout.precision(4);
+		std::cout.precision(5);
 		std::cout << "     Total    " << total << std::endl;
 
 	}
