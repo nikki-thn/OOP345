@@ -6,13 +6,13 @@
 #include <algorithm>
 #include <numeric>
 #include <vector>
+#include <exception>
 #include <math.h>
 
 
 namespace w8 {
 
 	template<typename T>
-
 	class DataTable {
 		int m_width;
 		int m_decimal;
@@ -69,9 +69,15 @@ namespace w8 {
 			std::vector <T> m_copyDataY = m_dataY;
 
 			sort(begin(m_copyDataY), end(m_copyDataY));
-
-			int index = m_numRecs / 2 - 0.1;
-			median = m_dataY[index];
+			int index = -1;
+			if (m_numRecs % 2 == 0) {
+				index = m_numRecs / 2;
+				median = m_copyDataY[index];
+			}
+			else {
+				index = m_numRecs / 2;
+				median = m_copyDataY[index + 1];
+			}
 			return median;
 		}
 
@@ -96,12 +102,12 @@ namespace w8 {
 		// - displays the data pairs as shown below
 		void display(std::ostream& os) const {
 
+			//*** CRASH when display function has a body or when os is used
 		/*	for (int i = 0; i < m_numRecs; i++) {
-				os << m_dataX[i] << "     " << m_dataY[i] << std::endl;
+				std::cout << m_dataX[i] << "     " << m_dataY[i] << std::endl;
 			}*/
-		
 		}
-	
+
 	};
 
 	template<typename DataTable>
