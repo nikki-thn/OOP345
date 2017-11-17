@@ -102,10 +102,16 @@ namespace w8 {
 		// - displays the data pairs as shown below
 		void display(std::ostream& os) const {
 
-			//*** CRASH when display function has a body or when os is used
-		/*	for (int i = 0; i < m_numRecs; i++) {
-				std::cout << m_dataX[i] << "     " << m_dataY[i] << std::endl;
-			}*/
+			//*** CRASH
+			for (int i = 0; i < m_numRecs; i++) {
+				os.setf(ios::fixed);
+				os.precision(2);
+				os << m_dataX[i];
+			//	os std::<< "     "; //operator<< is ambiguous 
+				os << m_dataY[i];
+				os.unsetf(ios::fixed);
+				os << std::endl;
+			}
 		}
 
 	};
