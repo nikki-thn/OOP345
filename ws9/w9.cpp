@@ -22,10 +22,10 @@ w9::List<w9::Product> merge(const w9::List<w9::Description>& desc,
 				w9::Product* temp;
 
 				temp = new w9::Product(desc[i].desc, price[j].price);
-				//auto temp = std::make_unique <w9::Product> (desc[i].desc, price[j].price);		
+				//auto temp = std::make_shared<w9::Product> (desc[i].desc, price[j].price);		
 				if (!temp->validate()) throw "*** Negative prices are invalid ***";
 				else priceList += temp;	
-				delete temp;
+
 			}
 		}
 	}
