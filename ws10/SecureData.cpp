@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <functional>
+#include <thread>
 #include "SecureData.h"
 
 namespace w10 {
@@ -60,6 +62,15 @@ namespace w10 {
 	}
 
 	void SecureData::code(char key) {
+
+		//thread t1(bind(converter, text, key, nbytes / 2, Cryptor()));
+		//thread t2(bind(converter, text + nbytes / 2, key, nbytes - (nbytes / 2), Cryptor()));
+
+		//t1.join();
+		//t2.join();
+
+
+
 		converter(text, key, nbytes, Cryptor());
 		encoded = !encoded;
 	}
@@ -71,38 +82,33 @@ namespace w10 {
 			throw std::string("\n***Data is not encoded***\n");
 		else {
 			// open binary file
-			std::fstream f(file, std::ios::out | std::ios::binary);
+			std::fstream f(file, std::ios::out | std::ios::binary | std::ios::trunc);
+			if (f.fail()) throw "fail to open file";
+			else {
 
-			// write binary file here
-			while (f) {
-				f.write(text, 1);
+				f.write(text, nbytes);
+				f.close();
 			}
-			f.close();
 		}
 	}
 
 	void SecureData::restore(const char* file, char key) {
 		// open binary file
 		std::fstream f(file, std::ios::in | std::ios::binary);
+		if (f.fail()) throw "fail to open file" + std::string(file);
+		// write binary file here
+		else {
 
-		char a;
-		int count;
+			f.seekg(0, std::ios::end);
+			nbytes = (int)f.tellg();
+			text = new char[nbytes + 1];
 
-		while (f) {
-			f >> a;
-			nbytes++;
+			f.seekg(0, std::ios::beg);
+			f.read(text, nbytes);
+			text[nbytes] = '\0';
+
+			f.close();
 		}
-
-		// allocate memory here
-
-		text = new char[count];
-
-		// read binary file here
-		f.seekp(0);
-		for (int i = 0; i < count; i++) {
-			f >> text[i];
-		}
-		f.close();
 
 		std::cout << "\n" << nbytes + 1 << " bytes copied from binary file "
 			<< file << " into memory (null byte included)\n";
