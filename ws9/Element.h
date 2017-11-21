@@ -48,13 +48,10 @@ namespace w9 {
 				<< price << std::endl;
 		}
 		bool validate() {
-
-			bool isValid = true;
-
-			if (price < 0) {
+		 bool isValid = true;
+			if (price < 0.0) {
 				isValid = false;
 			}
-
 			return isValid;
 		}
 	};

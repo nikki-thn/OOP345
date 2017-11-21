@@ -14,15 +14,25 @@ w9::List<w9::Product> merge(const w9::List<w9::Description>& desc,
 	const w9::List<w9::Price>& price) {
 
 	w9::List<w9::Product> priceList;
-	for (int i = 0; i < desc.size(); i++) {
+	for (size_t i = 0; i < desc.size(); i++) {
 
-		for (int j = 0; j < price.size(); j++) {
+		for (size_t j = 0; j < price.size(); j++) {
 
 			if (desc[i].code == price[j].code) {
-				w9::Product* temp;
+				//w9::Product* temp;
 
-				temp = new w9::Product(desc[i].desc, price[j].price);
-				//auto temp = std::make_shared<w9::Product> (desc[i].desc, price[j].price);		
+				//temp = new w9::Product(desc[i].desc, price[j].price);
+
+
+				//***ASK WHY 1 and 2 are identical but one works one doesn't
+
+				//1
+				//auto temp = std::make_unique<w9::Product> (desc[i].code, price[j].code);
+				
+				//2
+				std::unique_ptr<w9::Product> temp (new w9::Product(desc[i].desc, price[j].price));
+				
+			
 				if (!temp->validate()) throw "*** Negative prices are invalid ***";
 				else priceList += temp;	
 
