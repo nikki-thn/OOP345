@@ -79,3 +79,41 @@ int main() {
 
 	return 0;
 }
+
+//Parse string using SUBSTR
+
+int main() {
+//
+//	fstream file;
+//	file.open("text.txt", ios::in);
+//	vector<string> vect;
+//	while (!file.eof()) {
+//		std::string temp;
+//		getline(file, temp, '\n');
+//		vect.push_back(temp);
+//	}
+//	file.close();
+//	string delimiter = "|";
+//	size_t next_pos = 0;
+//	std::string token, token1, token2;
+//
+//	std::string str;
+//
+//	token = vect[0].substr(next_pos, vect[0].find(delimiter));
+//
+//	next_pos = token.length() + 1;
+//
+//	str = vect[0].substr(next_pos);
+//
+//	token1 = str.substr(0, str.find(delimiter));
+//
+//	next_pos = token1.length() + 1;
+//
+//	str = str.substr(next_pos);
+//
+//	token2 = str.substr(0, str.find(delimiter));
+//
+//	std::cout << token << std::endl;
+//
+//	return 0;
+//}
