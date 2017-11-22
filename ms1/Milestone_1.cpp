@@ -23,11 +23,11 @@ int main(int argc, char** argv) {
 	std::cout << "Command Line Arguments\n----------------------\n";
 	std::cout << "Tasks File Specified          = " << argv[1] << "\n";
 	std::cout << "File Record Field Delimiter   = " << argv[2][0] << "\n\n";
-	//Utilities::setDelimiter(argv[2][0]);
-	//// end of command line processing
+	Utilities::setDelimiter(argv[2][0]);
+	// end of command line processing
 
-	//// Load, Accept and Display the Tasks
-	////
+	// Load, Accept and Display the Tasks
+	//
 	//std::cout << "\n*** Load and Accept the Tasks ***\n";
 	//std::vector<Task> tasks;
 	//loadFromFile(argv[1], tasks, std::cerr);
@@ -71,11 +71,11 @@ int main(int argc, char** argv) {
 	//for (auto& t : tasks)
 	//	t.display(std::cout);
 
-	//// Terminate
-	////
-	//std::cout << "\nDone!\nPress Enter Key to Exit ... ";
-	//char c;
-	//std::cin.get(c);
+	// Terminate
+	//
+	std::cout << "\nDone!\nPress Enter Key to Exit ... ";
+	char c;
+	std::cin.get(c);
 }
 
 void loadFromFile(const char* fileName, std::vector<Task>& taskSet, std::ostream& os) {

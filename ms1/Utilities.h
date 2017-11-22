@@ -8,16 +8,29 @@
 #include <fstream>
 
 class Utilities {
+
 	size_t field_width;           // maximum field width needed 
 	static char delimiter;        // field delimiter character
 	static std::ofstream logFile; // log file
+
 public:
-	Utilities();
-	size_t getFieldWidth() const;
+
+	//constructor
+	Utilities() : field_width(1) {}
+
+	// resets the field width of the current object to fw
+	void setFieldWidth(size_t fw) { field_width = fw; }
+
+	//return field_width of the current object
+	size_t getFieldWidth() const { return field_width;  }
+
+	//set delimiter to the new value
+	static void setDelimiter(const char delimiter_) { delimiter = delimiter_; }
+
+	//return logFile static member
+	static std::ofstream& getLogFile() { return logFile;  }
+
 	const std::string nextToken(const std::string&, size_t&, bool&);
-	static void setDelimiter(const char);
+
 	static void setLogFile(const char*);
-	static std::ofstream& getLogFile();
 };
-
-

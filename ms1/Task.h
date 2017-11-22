@@ -6,22 +6,37 @@
 // v2.0 - 23/02/2016
 #include <iostream>
 #include <string>
+#include "Utilities.h"
+#include "stdlib.h"
 
 class Task {
+
 	std::string name;          // name of the task
 	std::string slots;         // number of slots
 	std::string nextTask[2];   // names of the next tasks
 	const Task* pNextTask[2];  // addresses of the next tasks
 	static size_t field_width; // current maximum field width 
+
 public:
+
 	enum Quality { passed, redirect };
+
+	//constructor
 	Task(const std::string&);
+
+	//return number of slots by cast down to int
+	unsigned int getSlots() const {	return atoi(slots.c_str()); }
+
+	//returns the field width currently stored for all objects in this class
+	static size_t getFieldWidth() { return field_width; }
+
+	//return name of current object
+	const std::string& getName() const { return name; }
+
 	bool validate(const Task&);
-	const std::string& getName() const;
-	unsigned int getSlots() const;
 	const Task* getNextTask(Quality) const;
 	void display(std::ostream&) const;
-	static size_t getFieldWidth();
 };
 
-bool operator==(const Task&, const Task&);
+//retruns true if task a and b has same name
+bool operator==(const Task& a, const Task& b) { return a.getName() == b.getName(); }
