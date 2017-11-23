@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include "Task.h"
 
@@ -23,9 +24,7 @@ Task::Task(const std::string& record_) {
 
 	for (size_t i = 0; i < 4 && more; i++) {
 		temp = exactToken.nextToken(record_, pos, more);
-		if (temp != "") tokens[i] = temp;
-		exactToken.setFieldWidth(tokens.size());
-	
+		if (temp != "") tokens[i] = temp;	
 	}
 
 	if (field_width < exactToken.getFieldWidth()) {
@@ -88,17 +87,22 @@ const Task* Task::getNextTask(Quality quantity) const {
 
 void Task::display(std::ostream& os) const {
 
-	if (name != "") {
-		os << "Task Name: [" << name << "]       " << "[" << slots << "]" << std::endl;
+	//if (name != "") {
+	//	os << "Task Name: [" << name << "]       " << "[" << slots << "]" << std::endl;
 
-		if (nextTask[passed] != "") {
-			os << " Continue to: [" << nextTask[passed] << "]" << std::endl;
-		}
-		if (nextTask[redirect] != "") {
-			os << " Redirect to: [" << nextTask[redirect] << "]" << std::endl;
-		}
-	}
+	//	if (nextTask[passed] != "") {
+	//		os << " Continue to: [" << nextTask[passed] << "]" << std::endl;
+	//	}
+	//	if (nextTask[redirect] != "") {
+	//		os << " Redirect to: [" << nextTask[redirect] << "]" << std::endl;
+	//	}
+	//}
+
 
 }
+
+
+
+
 
 //https://stackoverflow.com/questions/25829143/trim-whitespace-from-a-string
