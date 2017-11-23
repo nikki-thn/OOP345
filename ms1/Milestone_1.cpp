@@ -37,24 +37,24 @@ int main(int argc, char** argv) {
 	for (auto& t : tasks)
 		t.display(std::cout);
 
-	//// Check nextTask
-	////
-	//std::cout << "\nCheck Follow-On Tasks\n---------------------\n";
-	//int nerr = 0;
-	//for (auto& t : tasks) {
-	//	try {
-	//		std::cout << t.getNextTask(Task::passed)->getName() << std::endl;
-	//		std::cout << t.getNextTask(Task::redirect)->getName() << std::endl;
-	//	}
-	//	catch (const std::string& msg) {
-	//		std::cerr << msg << std::endl;
-	//		nerr++;
-	//		if (nerr > 3) {
-	//			std::cerr << "*** Further checks suspended ***" << std::endl;
-	//			break;
-	//		}
-	//	}
-	//}
+	// Check nextTask
+	//
+	std::cout << "\nCheck Follow-On Tasks\n---------------------\n";
+	int nerr = 0;
+	for (auto& t : tasks) {
+		try {
+			std::cout << t.getNextTask(Task::passed)->getName() << std::endl;
+			std::cout << t.getNextTask(Task::redirect)->getName() << std::endl;
+		}
+		catch (const std::string& msg) {
+			std::cerr << msg << std::endl;
+			nerr++;
+			if (nerr > 3) {
+				std::cerr << "*** Further checks suspended ***" << std::endl;
+				break;
+			}
+		}
+	}
 
 	//// Validate the Tasks
 	////
