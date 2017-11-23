@@ -11,6 +11,7 @@
 #include "Task.h"
 #include "Utilities.h"
 
+
 void loadFromFile(const char*, std::vector<Task>&, std::ostream&);
 
 int main(int argc, char** argv) {
@@ -24,16 +25,17 @@ int main(int argc, char** argv) {
 	std::cout << "Tasks File Specified          = " << argv[1] << "\n";
 	std::cout << "File Record Field Delimiter   = " << argv[2][0] << "\n\n";
 	Utilities::setDelimiter(argv[2][0]);
-	// end of command line processing
+
+	//end of command line processing
 
 	// Load, Accept and Display the Tasks
-	//
-	//std::cout << "\n*** Load and Accept the Tasks ***\n";
-	//std::vector<Task> tasks;
-	//loadFromFile(argv[1], tasks, std::cerr);
-	//std::cout << "\nList of Accepted Tasks\n----------------------\n";
-	//for (auto& t : tasks)
-	//	t.display(std::cout);
+	
+	std::cout << "\n*** Load and Accept the Tasks ***\n";
+	std::vector<Task> tasks;
+	loadFromFile(argv[1], tasks, std::cerr);
+	std::cout << "\nList of Accepted Tasks\n----------------------\n";
+	for (auto& t : tasks)
+		t.display(std::cout);
 
 	//// Check nextTask
 	////
@@ -71,11 +73,12 @@ int main(int argc, char** argv) {
 	//for (auto& t : tasks)
 	//	t.display(std::cout);
 
-	// Terminate
-	//
-	std::cout << "\nDone!\nPress Enter Key to Exit ... ";
-	char c;
-	std::cin.get(c);
+	//Terminate	
+	//std::cout << "\nDone!\nPress Enter Key to Exit ... ";
+	//char c;
+	//std::cin.get(c);
+
+	return 0;
 }
 
 void loadFromFile(const char* fileName, std::vector<Task>& taskSet, std::ostream& os) {

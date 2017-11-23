@@ -25,7 +25,7 @@ public:
 	size_t getFieldWidth() const { return field_width;  }
 
 	//set delimiter to the new value
-	static void setDelimiter(const char delimiter_) { delimiter = delimiter_; }
+	static void setDelimiter(const char delimiter_) { Utilities::delimiter = delimiter_; }
 
 	//return logFile static member
 	static std::ofstream& getLogFile() { return logFile;  }

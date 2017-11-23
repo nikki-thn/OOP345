@@ -39,4 +39,4 @@ public:
 };
 
 //retruns true if task a and b has same name
-bool operator==(const Task& a, const Task& b) { return a.getName() == b.getName(); }
+//bool operator==(const Task& a, const Task& b) { return a.getName() == b.getName(); }
