@@ -5,7 +5,6 @@
 // v1.0 - 24/10/2015
 // v2.0 - 23/02/2016
 #include <iostream>
-#include <string>
 #include "Utilities.h"
 #include "stdlib.h"
 
@@ -39,4 +38,4 @@ public:
 };
 
 //retruns true if task a and b has same name
-//bool operator==(const Task& a, const Task& b) { return a.getName() == b.getName(); }
+static bool operator==(const Task& a, const Task& b) { return a.getName().compare(b.getName()) == 0; }
