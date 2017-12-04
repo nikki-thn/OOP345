@@ -1,5 +1,4 @@
-#include <string>
-#include <iostream>
+#include<iostream>
 #include <iomanip>
 #include <vector>
 #include "Task.h"
@@ -27,10 +26,6 @@ Task::Task(const std::string& record_) {
 		if (temp != "") tokens[i] = temp;	
 	}
 
-	if (field_width < exactToken.getFieldWidth()) {
-		field_width = exactToken.getFieldWidth();
-	}
-
 	for (auto& i : tokens) {
 		size_t first = i.find_first_not_of(' ');
 		i.erase(0, first);
@@ -39,7 +34,14 @@ Task::Task(const std::string& record_) {
 	}
 
 
-	if (tokens[0] != "") { name = tokens[0]; }
+	if (tokens[0] != "") {
+		name = tokens[0]; 
+		//update the current object's field_width if its current
+		// value is less than the size of the token extracted.
+		if (field_width < exactToken.getFieldWidth()) {
+			field_width = exactToken.getFieldWidth();
+		}
+	}
 	else throw std::string(record_) + std::string("*** no token found before the delimiter ***");
 
 	if (tokens[1] != "") slots = tokens[1];
@@ -51,53 +53,88 @@ bool Task::validate(const Task& task) {
 
 	bool isValid = false;
 
-	if (nextTask[passed] == task.getName()) {
+	//if (nextTask[passed] == task.getName()) {
+	//	pNextTask[passed] = &task;
+	//}
+	//else if (nextTask[redirect] == task.getName()) {
+	//	pNextTask[redirect] = &task;
+	//}
+	//else {
+	//	//if (nextTask[redirect] != task.getName() && nextTask[passed] != task.getName())
+	//	pNextTask[passed] = nullptr;
+	//	pNextTask[redirect] = nullptr;
+	//	
+	//}
+
+
+
+	if (task.getName() == nextTask[passed]) {
 		pNextTask[passed] = &task;
 	}
-	else if (nextTask[redirect] == task.getName()) {
+	else if (task.getName() == nextTask[redirect]) {
 		pNextTask[redirect] = &task;
 	}
-	else {
-		pNextTask[passed] = nullptr;
-		pNextTask[redirect] = nullptr;
+	if ((nextTask[passed].empty() || pNextTask[passed] != nullptr)
+		&& (nextTask[redirect].empty() || pNextTask[redirect])) {
 		isValid = true;
 	}
-
+	
 	return isValid;
 }
 
 const Task* Task::getNextTask(Quality quantity) const {
 	int index = -1;
 
-	if (quantity == passed) {
-		if (pNextTask[passed] != nullptr && pNextTask[redirect] == nullptr) {
-			index = 0;
-		}
-		else if (pNextTask[passed] != nullptr && pNextTask[redirect] != nullptr) {
-			throw std::string("*** Validate [") + nextTask[passed] +
-				std::string("] @ [") + nextTask[redirect] +
-				std::string("] ***");
-		}
-	}
-	else if (quantity == redirect) {
-		index = 1;
+	if (quantity == passed) index = passed;
+	else if (quantity == redirect) index = 1;
+
+	if (pNextTask[passed] == nullptr) {
+
+		throw std::string("*** Validate [" + nextTask[passed] +
+			"] @ [" + name + "] ***");
 	}
 	return pNextTask[index];
 }
 
 void Task::display(std::ostream& os) const {
+	//os.setf(std::ios::left);
 
-	//if (name != "") {
-	//	os << "Task Name: [" << name << "]       " << "[" << slots << "]" << std::endl;
+
+	//	os << "Task Name   : [" << name << "] " << " [" << slots << "]" << std::endl;
 
 	//	if (nextTask[passed] != "") {
-	//		os << " Continue to: [" << nextTask[passed] << "]" << std::endl;
+	//		os << " Continue to: ["  << nextTask[passed] << "]";
+	//		if (pNextTask[passed] == nullptr) os <<"*** to be validated ***" << std::endl;
+	//		else os << std::endl;
 	//	}
 	//	if (nextTask[redirect] != "") {
-	//		os << " Redirect to: [" << nextTask[redirect] << "]" << std::endl;
+	//		os << " Redirect to: " << "[" << nextTask[redirect] << "]" ;
+	//		if (pNextTask[passed] == nullptr) os << "*** to be validated ***" << std::endl;
+	//		else os << std::endl;
 	//	}
-	//}
+	//
+	
+	if (pNextTask[passed] != nullptr) {
+		os << "Task Name      :  " << std::setw(field_width + 3) << "[" + name + "]" << "[" + slots + "]" << std::endl;
+		os << "  Continue to  :  " << std::setw(field_width + 3) << "[" + nextTask[passed] + "]" << std::endl;
+		if (!nextTask[redirect] == "") {
+			std::cout << "  Redirect to  :  " << std::setw(field_width + 3) << "[" + nextTask[redirect] + "]" << std::endl;
+		}
+	}
+	else {
+		if (nextTask[passed] == "") {
+			os << "Task Name      :  " << std::left << std::setw(field_width + 3) << "[" + name + "]" << "[1]" << std::endl;
+		}
+		else {
+			os << "Task Name      :  " << std::left << std::setw(field_width + 3) << "[" + name + "]" << "[" + slots + "]"<< std::endl;
+			os << "  Continue to  :  " << std::left << std::setw(field_width + 6) << "[" + nextTask[passed] + "]" << "*** to be validated ***" << std::endl;
 
+			if (nextTask[redirect] != "") {
+				os << "  Redirect to  :  " << std::left << std::setw(field_width + 6) << "[" + nextTask[redirect] + "]" << "*** to be validated ***" << std::endl;
+
+			}
+		}
+	}
 
 }
 
