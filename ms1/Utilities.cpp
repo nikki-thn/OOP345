@@ -8,6 +8,7 @@ const std::string Utilities::nextToken(const std::string& str, size_t& next_pos,
 	std::string token, temp;
 
 	if (next_pos < str.length()) {
+
 		temp = str.substr(next_pos);
 
 		std::istringstream iss(temp);
@@ -17,6 +18,9 @@ const std::string Utilities::nextToken(const std::string& str, size_t& next_pos,
 		next_pos += token.length() + 1;
 	}
 	else more = false;
+
+	//update if its current value is less than the size of the token extracted.  
+	if(field_width < token.length() && token.length() < 13) field_width = token.length();
 
 	return token;
 }
