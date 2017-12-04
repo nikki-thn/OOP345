@@ -53,21 +53,6 @@ bool Task::validate(const Task& task) {
 
 	bool isValid = false;
 
-	//if (nextTask[passed] == task.getName()) {
-	//	pNextTask[passed] = &task;
-	//}
-	//else if (nextTask[redirect] == task.getName()) {
-	//	pNextTask[redirect] = &task;
-	//}
-	//else {
-	//	//if (nextTask[redirect] != task.getName() && nextTask[passed] != task.getName())
-	//	pNextTask[passed] = nullptr;
-	//	pNextTask[redirect] = nullptr;
-	//	
-	//}
-
-
-
 	if (task.getName() == nextTask[passed]) {
 		pNextTask[passed] = &task;
 	}
