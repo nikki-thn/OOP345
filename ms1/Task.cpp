@@ -33,7 +33,6 @@ Task::Task(const std::string& record_) {
 		i.erase(last + 1);
 	}
 
-
 	if (tokens[0] != "") {
 		name = tokens[0]; 
 		//update the current object's field_width if its current
@@ -53,10 +52,10 @@ bool Task::validate(const Task& task) {
 
 	bool isValid = false;
 
-	if (task.getName() == nextTask[passed]) {
+	if (nextTask[passed] == task.getName()) {
 		pNextTask[passed] = &task;
 	}
-	else if (task.getName() == nextTask[redirect]) {
+	else if (nextTask[redirect] == task.getName()) {
 		pNextTask[redirect] = &task;
 	}
 	if ((nextTask[passed].empty() || pNextTask[passed] != nullptr)
@@ -78,47 +77,37 @@ const Task* Task::getNextTask(Quality quantity) const {
 		throw std::string("*** Validate [" + nextTask[passed] +
 			"] @ [" + name + "] ***");
 	}
+
 	return pNextTask[index];
 }
 
 void Task::display(std::ostream& os) const {
-	//os.setf(std::ios::left);
+	os.setf(std::ios::left);
 
-
-	//	os << "Task Name   : [" << name << "] " << " [" << slots << "]" << std::endl;
-
-	//	if (nextTask[passed] != "") {
-	//		os << " Continue to: ["  << nextTask[passed] << "]";
-	//		if (pNextTask[passed] == nullptr) os <<"*** to be validated ***" << std::endl;
-	//		else os << std::endl;
-	//	}
-	//	if (nextTask[redirect] != "") {
-	//		os << " Redirect to: " << "[" << nextTask[redirect] << "]" ;
-	//		if (pNextTask[passed] == nullptr) os << "*** to be validated ***" << std::endl;
-	//		else os << std::endl;
-	//	}
-	//
-	
 	if (pNextTask[passed] != nullptr) {
-		os << "Task Name      :  " << std::setw(field_width + 3) << "[" + name + "]" << "[" + slots + "]" << std::endl;
+
+		os << "Task Name      :  " << std::setw(field_width + 3) << "[" + name + "]" << "[" << slots + "]" << std::endl;
 		os << "  Continue to  :  " << std::setw(field_width + 3) << "[" + nextTask[passed] + "]" << std::endl;
-		if (!nextTask[redirect] == "") {
-			std::cout << "  Redirect to  :  " << std::setw(field_width + 3) << "[" + nextTask[redirect] + "]" << std::endl;
+		if (nextTask[redirect] != "") {
+			os << "  Redirect to  :  " << std::setw(field_width + 3) << "[" + nextTask[redirect] + "]" << std::endl;
 		}
 	}
 	else {
+
 		if (nextTask[passed] == "") {
-			os << "Task Name      :  " << std::left << std::setw(field_width + 3) << "[" + name + "]" << "[1]" << std::endl;
+			os << "Task Name      :  "  << std::setw(field_width + 3) << "[" + name + "]" << "[" << slots << "]" << std::endl;
 		}
 		else {
-			os << "Task Name      :  " << std::left << std::setw(field_width + 3) << "[" + name + "]" << "[" + slots + "]"<< std::endl;
-			os << "  Continue to  :  " << std::left << std::setw(field_width + 6) << "[" + nextTask[passed] + "]" << "*** to be validated ***" << std::endl;
+			os << "Task Name      :  " << std::setw(field_width + 3) << "[" + name + "]" << "[" << slots + "]"<< std::endl;
+			os << "  Continue to  :  " << std::setw(field_width + 6) << "[" + nextTask[passed] + "]" << "*** to be validated ***" << std::endl;
 
 			if (nextTask[redirect] != "") {
-				os << "  Redirect to  :  " << std::left << std::setw(field_width + 6) << "[" + nextTask[redirect] + "]" << "*** to be validated ***" << std::endl;
+				os << "  Redirect to  :  " << std::setw(field_width + 6) << "[" + nextTask[redirect] + "]" << "*** to be validated ***" << std::endl;
 
 			}
 		}
+
+		os.setf(std::ios::left);
 	}
 
 }
