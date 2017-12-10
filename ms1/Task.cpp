@@ -59,7 +59,7 @@ bool Task::validate(const Task& task) {
 		pNextTask[redirect] = &task;
 	}
 	if ((nextTask[passed].empty() || pNextTask[passed] != nullptr)
-		&& (nextTask[redirect].empty() || pNextTask[redirect])) {
+		&& (nextTask[redirect].empty() || pNextTask[redirect] != nullptr)) {
 		isValid = true;
 	}
 	
