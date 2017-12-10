@@ -31,7 +31,7 @@ public:
 	CustomerOrder& operator=(const CustomerOrder&) = delete;
 	CustomerOrder(CustomerOrder&&) NOEXCEPT;
 	CustomerOrder&& operator=(CustomerOrder&&) NOEXCEPT;
-	~CustomerOrder() { delete[] order; }
+	~CustomerOrder();
 
 	const std::string& operator[](unsigned int) const;
 	void fill(Item&);

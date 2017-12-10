@@ -51,7 +51,7 @@ Item::Item(const std::string& record_) {
 }
 
 
-void Item::display(std::ostream& os , bool full = false) const {
+void Item::display(std::ostream& os , bool full) const {
 
 	os << std::left << std::setw(field_width + 3) << name << std::endl;
 	os << std::right << std::setw (field_width + 3) << " [00" << code <<  " ] ";
