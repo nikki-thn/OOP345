@@ -2,6 +2,7 @@
 #include "Utilities.h"
 
 char Utilities::delimiter = '\n';
+const int max_width = 13;
 
 const std::string Utilities::nextToken(const std::string& str, size_t& next_pos, bool& more) {
 
@@ -20,7 +21,7 @@ const std::string Utilities::nextToken(const std::string& str, size_t& next_pos,
 	else more = false;
 
 	//update if its current value is less than the size of the token extracted.  
-	if(field_width < token.length() && token.length() < 13) field_width = token.length();
+	if(field_width < token.length() && token.length() < max_width) field_width = token.length();
 
 	return token;
 }
