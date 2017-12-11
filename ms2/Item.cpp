@@ -8,10 +8,7 @@ size_t Item::field_width = 0;
 const size_t numToken = 5;
 
 Item::Item(const std::string& record_) {
-	
-	name = "";
-	filler = "";
-	remover = "";
+
 	code = 1;
 	description = "no detailed description";
 
@@ -23,7 +20,10 @@ Item::Item(const std::string& record_) {
 
 	for (size_t i = 0; i < numToken && more; i++) {
 		temp = exactToken.nextToken(record_, pos, more);
-		if (temp != "") tokens[i] = temp;
+		if (!temp.empty()) tokens[i] = temp;
+
+		//update the current object's field_width if its current
+		// value is less than the size of the token extracted.
 	}
 
 	for (auto& i : tokens) {
@@ -33,32 +33,30 @@ Item::Item(const std::string& record_) {
 		i.erase(last + 1);
 	}
 
-	if (tokens[0] != "") {
+	if (!tokens[0].empty()) {
 		name = tokens[0];
-	}
-	else throw std::string(record_) + std::string("*** no name has been specified ***");
+		if (field_width < name.length()) {
+			field_width = name.length();
+		}
+		else throw std::string(record_) + std::string("*** no name has been specified ***");
 
-	//update the current object's field_width if its current
-	// value is less than the size of the token extracted.
-	if (field_width < exactToken.getFieldWidth()) {
-		field_width = exactToken.getFieldWidth();
+		if (!tokens[1].empty()) filler = tokens[1];
+		if (tokens[2] != "") remover = tokens[2];
+		if (tokens[3] != "") code = atoi(tokens[3].c_str());
+		if (tokens[4] != "") description = tokens[4];
 	}
-
-	if (tokens[1] != "") filler = tokens[1];
-	if (tokens[2] != "") remover = tokens[2];
-	if (tokens[3] != "") code = atoi(tokens[3].c_str());
-	if (tokens[4] != "") description = tokens[4];
 }
 
 
-void Item::display(std::ostream& os , bool full) const {
+void Item::display(std::ostream& os, bool full) const {
 
-	os << std::left << std::setw(field_width + 3) << name << std::endl;
-	os << std::right << std::setw (field_width + 3) << " [00" << code <<  " ] ";
+	os << std::setfill(' ');
+	os << std::left << std::setw(field_width) << name;
+
+	os << std::right << " [" << std::setw(CODE_WIDTH) << std::setfill('0') << code << "] ";
 
 	if (full == true) {
-		os << "From " << std::left << std::setw(field_width) << filler;
-		os << "To " << std::left << std::setw(field_width) << remover << std::endl;
-		os << std::left << std::setw(field_width) << ": " << description << std::endl;
+		os << "From " << std::setw(field_width) << std::left << std::setfill(' ') << filler << " To " << remover << std::endl;
+		os << std::right << std::setw(field_width + CODE_WIDTH + 4) << " : " << description << std::endl;
 	}
 }

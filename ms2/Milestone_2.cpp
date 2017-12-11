@@ -50,18 +50,18 @@ int main(int argc, char** argv) {
 	for (auto& i : items)
 		i.display(std::cout, true);
 
-	// Fill the Customer Orders with the Items in Stock
-	//
-	std::cout << "\n*** Process the Customer Orders ***\n";
-	for (auto& i : items)
-		for (auto& s : customerOrders)
-			s.fill(i);
+	//// Fill the Customer Orders with the Items in Stock
+	////
+	//std::cout << "\n*** Process the Customer Orders ***\n";
+	//for (auto& i : items)
+	//	for (auto& s : customerOrders)
+	//		s.fill(i);
 
-	// Display the Processed Customer Orders
-	//
-	std::cout << "\nList of Processed Customer Orders\n---------------------------------\n";
-	for (auto& s : customerOrders)
-		s.display(std::cout);
+	//// Display the Processed Customer Orders
+	////
+	//std::cout << "\nList of Processed Customer Orders\n---------------------------------\n";
+	//for (auto& s : customerOrders)
+	//	s.display(std::cout);
 
 	// Terminate
 	//

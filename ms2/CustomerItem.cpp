@@ -1,7 +1,7 @@
 #include "CustomerItem.h"
 #include <iomanip>
 
-const int CODE_WIDTH = 6;
+const int CODE_WIDTH = 5;
 
 CustomerItem::CustomerItem(const std::string& name_) {
 	
@@ -22,11 +22,13 @@ void CustomerItem::clear() {
 }
 void CustomerItem::display(std::ostream& os) const {
 	if (filled == true) {
-		os << std::setw(CODE_WIDTH) << "[" << os.fill('0') << code << "] ";
-		os << name << std::endl;
+		
+		os << " + ";
 	}
 	else {
-		os << std::setw(CODE_WIDTH) << "[" << os.fill('0') << "] ";
-		os << name << std::endl;
+		os << " - ";
 	}
+
+	os << "[" << std::setw(CODE_WIDTH) << std::right << os.fill('0') << code << "] ";
+	os << name << std::endl;
 }
