@@ -63,7 +63,7 @@ CustomerOrder::CustomerOrder(const std::string& record_) {
 	}
 }
 
-CustomerOrder::CustomerOrder(const CustomerOrder& pCustOrder)
+CustomerOrder::CustomerOrder(const CustomerOrder& order_)
 {
 	throw "Copy restricted";
 }
@@ -138,11 +138,11 @@ void CustomerOrder::fill(Item& item_) {
 	}
 }
 
-void CustomerOrder::remove(Item& item)
+void CustomerOrder::remove(Item& item_)
 {
-	for (unsigned int i = 0; i < nOrders; i++)
+	for (size_t i = 0; i < nOrders; i++)
 	{
-		if (order[i].getName() == item.getName())
+		if (order[i].getName() == item_.getName())
 		{
 			nOrders--;
 		}
@@ -153,6 +153,6 @@ void CustomerOrder::display(std::ostream& os) const
 {
 	os << std::setw(field_width) << std::setfill(' ') << std::left << name << " :  " << product << std::endl;
 
-	for (unsigned int i = 0; i < nOrders; i++)
+	for (size_t i = 0; i < nOrders; i++)
 		order[i].display(os);
 }
