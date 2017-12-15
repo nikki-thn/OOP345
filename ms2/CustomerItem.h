@@ -6,6 +6,7 @@
 // v2.0 - 23/02/2016
 #include <iostream>
 #include <string>
+#include "Item.h"
 
 class Item;
 
@@ -29,7 +30,7 @@ public:
 	void display(std::ostream&) const;
 
 	//return true if the current object asks for item
-	bool asksFor(const Item&) const { return !name.empty(); }
+	bool asksFor(const Item& rhs) const { return name == rhs.getName(); }
 
 	//return true if the current object's request has been filled
 	bool isFilled() const { return filled; }

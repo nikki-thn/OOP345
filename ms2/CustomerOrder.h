@@ -26,7 +26,7 @@ class CustomerOrder {
 public:
 
 	CustomerOrder(const std::string&);
-	CustomerOrder(const CustomerOrder&) = delete; //restrict copy
+	CustomerOrder(const CustomerOrder&); //restrict copy throw exception
 
 	CustomerOrder& operator=(const CustomerOrder&) = delete; //restrict copy
 	CustomerOrder(CustomerOrder&&) NOEXCEPT;

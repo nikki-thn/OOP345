@@ -20,16 +20,28 @@ class Item {
 
 public:
 
+	//constructor
 	Item(const std::string& = std::string());
 
-	void display(std::ostream&, bool = false) const;
+	//print item os os
+	void display(std::ostream&, bool full = false) const;
 
-
+	//increment code by one
 	int operator++(int) { return code++; }
+
+	//return true if object is empty
 	bool empty() const { return name.empty(); }
+
+	//return code
 	unsigned int getCode() const { return code; }
+
+	//return component name
 	const std::string& getName() const { return name; }
+	
+	//return filler
 	const std::string& getFiller() const { return filler; }
+	
+	//return remover
 	const std::string& getRemover() const { return remover; }
 	
 

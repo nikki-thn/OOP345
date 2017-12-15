@@ -123,9 +123,9 @@ void CustomerOrder::fill(Item& item_) {
 
 	for (size_t i = 0; i < nOrders; i++)
 	{
-		if (order[i].asksFor(item_))
+		if (order[i].asksFor(item_)) //if true
 		{
-			order[i].fill(item_.getCode);
+			order[i] = item_.getName();
 			item_++;
 		}
 	}
@@ -133,13 +133,13 @@ void CustomerOrder::fill(Item& item_) {
 
 void CustomerOrder::remove(Item& item_)
 {
+	int index = -1;
 	for (size_t i = 0; i < nOrders; i++)
 	{
-		if (order[i].getName() == item_.getName())
-		{
-			nOrders--;
-		}
+		if (order[i].getName() == item_.getName()) index = i;
 	}
+
+	for (size_t i = index; i < nOrders; index++) order[i] = order[i + 1];
 }
 
 void CustomerOrder::display(std::ostream& os) const

@@ -1,7 +1,7 @@
 #include "CustomerItem.h"
 #include <iomanip>
 
-const int CODE_WIDTH = 5;
+//const int CODE_WIDTH = 5;
 
 CustomerItem::CustomerItem(const std::string& name_) {
 	
