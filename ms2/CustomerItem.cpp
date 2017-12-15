@@ -16,11 +16,14 @@ void CustomerItem::fill(const unsigned int c) {
 	code = c;
 	filled = true;
 }
+
 void CustomerItem::clear() {
 	code = 0;
 	filled = false;
 }
+
 void CustomerItem::display(std::ostream& os) const {
+
 	if (filled == true) {
 		
 		os << " + ";

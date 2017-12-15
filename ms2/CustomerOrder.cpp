@@ -125,7 +125,7 @@ void CustomerOrder::fill(Item& item_) {
 	{
 		if (order[i].asksFor(item_))
 		{
-			order[i].fill(item_.getCode());
+			order[i].fill(item_.getCode);
 			item_++;
 		}
 	}
