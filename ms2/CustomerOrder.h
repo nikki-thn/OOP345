@@ -26,29 +26,18 @@ class CustomerOrder {
 public:
 
 	CustomerOrder(const std::string&);
-	CustomerOrder(const CustomerOrder&); //restrict copy throw exception
+	CustomerOrder(const CustomerOrder&) = delete;
 
-	CustomerOrder& operator=(const CustomerOrder&) = delete; //restrict copy
+	CustomerOrder& operator=(const CustomerOrder&) = delete;
 	CustomerOrder(CustomerOrder&&) NOEXCEPT;
 	CustomerOrder&& operator=(CustomerOrder&&) NOEXCEPT;
 	~CustomerOrder();
 
-	//return the order at index parameter
 	const std::string& operator[](unsigned int) const;
-	
-	//set fill status for order determined by parameter
-	//increase item's code for each item filled
 	void fill(Item&);
-
-	//remove paramter item from items array 
 	void remove(Item&);
-
-	//display to os stream
 	void display(std::ostream&) const;
 
-	//return size of order array (num of items)
 	unsigned int noOrders() const { return nOrders; }
-
-	//returns true if object is empty
 	bool empty() const { return name.empty(); }
 };

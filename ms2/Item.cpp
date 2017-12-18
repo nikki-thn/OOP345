@@ -21,30 +21,16 @@ Item::Item(const std::string& record_) {
 	for (size_t i = 0; i < numToken && more; i++) {
 		temp = exactToken.nextToken(record_, pos, more);
 		if (!temp.empty()) tokens[i] = temp;
-
-		//update the current object's field_width if its current
-		// value is less than the size of the token extracted.
 	}
 
-	for (auto& i : tokens) {
-		size_t first = i.find_first_not_of(' ');
-		i.erase(0, first);
-		size_t last = i.find_last_not_of(' ');
-		i.erase(last + 1);
-	}
+	if (!tokens[0].empty()) name = tokens[0];
+	else throw std::string(record_ + "*** no token found before the delimiter ***");
 
-	if (!tokens[0].empty()) {
-		name = tokens[0];
-		if (field_width < name.length()) {
-			field_width = name.length();
-		}
-		else throw std::string(record_) + std::string("*** no name has been specified ***");
+	if (!tokens[1].empty()) filler = tokens[1];
+	if (!tokens[2].empty()) remover = tokens[2];
+	if (!tokens[3].empty()) code = atoi(tokens[3].c_str());
+	if (!tokens[4].empty()) description = tokens[4];
 
-		if (!tokens[1].empty()) filler = tokens[1];
-		if (tokens[2] != "") remover = tokens[2];
-		if (tokens[3] != "") code = atoi(tokens[3].c_str());
-		if (tokens[4] != "") description = tokens[4];
-	}
 }
 
 

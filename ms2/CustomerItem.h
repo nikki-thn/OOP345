@@ -6,7 +6,6 @@
 // v2.0 - 23/02/2016
 #include <iostream>
 #include <string>
-#include "Item.h"
 
 class Item;
 
@@ -19,23 +18,12 @@ class CustomerItem {
 public:
 
 	CustomerItem(const std::string& = std::string());
-
-	//set the item code for the current object to parameter
 	void fill(const unsigned int);
-
-	//set item code to o and clear filled status
 	void clear();
-
-	//display to ostream
 	void display(std::ostream&) const;
 
-	//return true if the current object asks for item
-	bool asksFor(const Item& rhs) const { return name == rhs.getName(); }
-
-	//return true if the current object's request has been filled
+	bool asksFor(const Item&) const { return !name.empty(); }
 	bool isFilled() const { return filled; }
-
-	//return name of the request component
 	const std::string& getName() const { return name; }
 
 

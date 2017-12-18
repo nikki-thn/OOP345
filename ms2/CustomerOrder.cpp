@@ -1,3 +1,10 @@
+/*************************
+* OOP345 - Milestone 1
+* Author: Nahal Esmaeili
+* Prof: John Blair
+* August 08, 2017
+*************************/
+
 #include <iomanip>
 #include <iostream>
 #include <memory>
@@ -21,44 +28,32 @@ CustomerOrder::CustomerOrder(const std::string& record_) {
 	bool more = true;
 	std::vector<std::string> tokens; //stores all available tokens
 
+	int validRecs = 0;
+
 	while (more) {
 		temp = exactToken.nextToken(record_, pos, more);
 		if (!temp.empty()) tokens.push_back(temp);
-	}
 
-	int validRecs = 0;
-	for (auto& i : tokens) {
+		if (field_width < temp.length()) field_width = temp.length();
 
-		if (!i.empty()) {
-
-			size_t first = i.find_first_not_of(' ');
-			i.erase(0, first);
-			size_t last = i.find_last_not_of(' ');
-			i.erase(last + 1);
-
-			if (field_width < i.length()) field_width = i.length();
-			
-			if (i.length() > 1) validRecs++;
-		}
+		if (temp.length() > 1) validRecs++;
 	}
 
 	nOrders = validRecs - 2;
 
-	if (!tokens[0].empty()) name = tokens[0];
-	else throw std::string(record_) + std::string("*** record is missing customer name field ***");
-	
-	if (!tokens[1].empty()) product = tokens[1];
-	else throw "Product name is missing";
+	if (tokens.size() > 2) {
+		if (!tokens[0].empty()) name = tokens[0];
+		else throw std::string(record_ + "<-- *** no token found before the delimiter ***");
 
-	order = new CustomerItem[nOrders];
-	for (size_t i = 0; i < nOrders; i++) {
-		order[i] = CustomerItem(tokens[i + 2]);
+		if (!tokens[1].empty()) product = tokens[1];
+		else throw  std::string(record_ + "<-- *** no token found before the delimiter ***");
+
+		order = new CustomerItem[nOrders];
+		for (size_t i = 0; i < nOrders; i++) {
+			order[i] = CustomerItem(tokens[i + 2]);
+		}
 	}
-}
-
-CustomerOrder::CustomerOrder(const CustomerOrder& order_)
-{
-	throw "Copy restricted";
+	else throw std::string(record_ + "<-- *** no token found before the delimiter ***");
 }
 
 CustomerOrder::CustomerOrder(CustomerOrder&& order_) NOEXCEPT {
@@ -123,29 +118,33 @@ void CustomerOrder::fill(Item& item_) {
 
 	for (size_t i = 0; i < nOrders; i++)
 	{
-		if (order[i].asksFor(item_)) //if true
+		if (order[i].asksFor(item_))
 		{
-			order[i] = item_.getName();
+			order[i].fill(item_.getCode());
 			item_++;
 		}
 	}
 }
 
-void CustomerOrder::remove(Item& item_)
+void CustomerOrder::remove(Item& item)
 {
-	int index = -1;
-	for (size_t i = 0; i < nOrders; i++)
+	for (unsigned int i = 0; i < nOrders; i++)
 	{
-		if (order[i].getName() == item_.getName()) index = i;
+		if (order[i].getName() == item.getName())
+		{
+			nOrders--;
+		}
 	}
-
-	for (size_t i = index; i < nOrders; index++) order[i] = order[i + 1];
 }
 
-void CustomerOrder::display(std::ostream& os) const
-{
-	os << std::setw(field_width) << std::setfill(' ') << std::left << name << " :  " << product << std::endl;
+void CustomerOrder::display(std::ostream& os) const {
 
-	for (size_t i = 0; i < nOrders; i++)
+	os.width(field_width);
+	os.fill(' ');
+	os.setf(std::ios::left);
+	os << name << " :  " << product << std::endl;
+	os.unsetf(std::ios::left);
+	
+	for (unsigned int i = 0; i < nOrders; i++)
 		order[i].display(os);
 }
