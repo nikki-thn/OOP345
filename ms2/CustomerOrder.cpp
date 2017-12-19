@@ -1,10 +1,3 @@
-/*************************
-* OOP345 - Milestone 1
-* Author: Nahal Esmaeili
-* Prof: John Blair
-* August 08, 2017
-*************************/
-
 #include <iomanip>
 #include <iostream>
 #include <memory>
