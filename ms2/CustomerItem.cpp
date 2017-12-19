@@ -1,13 +1,11 @@
 #include "CustomerItem.h"
-#include <iomanip>
 
 const int CODE_WIDTH = 5;
 
 CustomerItem::CustomerItem(const std::string& name_) {
 	
-	if (!name_.empty()) {
-		name = name_;	
-	}
+	if (!name_.empty()) name = name_;	
+	
 	code = 0;
 	filled = false;
 }
@@ -21,14 +19,10 @@ void CustomerItem::clear() {
 	filled = false;
 }
 void CustomerItem::display(std::ostream& os) const {
-	if (filled == true) {
-		
-		os << " + ";
-	}
-	else {
-		os << " - ";
-	}
-
+	
+	if (filled == true) os << " + "; //print + if item is filled
+	else os << " - ";
+	
 	os << "[";
 	os.setf(std::ios::right);
 	os.fill('0');
