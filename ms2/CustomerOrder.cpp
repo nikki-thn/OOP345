@@ -119,7 +119,7 @@ void CustomerOrder::fill(Item& item_) {
 
 void CustomerOrder::remove(Item& item)
 {
-	for (unsigned int i = 0; i < nOrders; i++)
+	for (size_t i = 0; i < nOrders; i++)
 	{
 		if (order[i].getName() == item.getName())
 		{
