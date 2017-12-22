@@ -36,6 +36,11 @@ class C : public A, public B {
      
      
 };
+    
+class Z {
+
+    
+ };
 
 int main () {
 
@@ -45,5 +50,11 @@ int main () {
      instanceC.displayB(); //C::displayB will be call, shadowing
      
      //ptrvirtual enable pointer will be created if we enable polymorphism
+    
+    A* theIntance = new C;
+    the instance->display();
+    
+    //problem with multiple inheritance
+    
      return 0;
 }
