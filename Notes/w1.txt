@@ -1,0 +1,4 @@
+extern: keyword to signal a variable that will be define or use somewhere else
+uint8_t: unsigned int 8 bytes size
+uint16_t, int8_t, int16_t
+
