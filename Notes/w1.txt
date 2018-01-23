@@ -2,3 +2,20 @@ extern: keyword to signal a variable that will be define or use somewhere else
 uint8_t: unsigned int 8 bytes size
 uint16_t, int8_t, int16_t
 
+Integral Types:
+If we store positive and negative, we will lose a bit of range. Size of intergral types always depends on system
+
+Floating Point Types:
+you now have the fractional components: exponent, mantissa (ie: float, double, long double)
+
+Void Types: 
+incomplete type, object cannot be void. We use when we dont want to return a value
+
+Initalizing Variables:
+Universal form does type checking
+int x {2} //when we do this, the compiler will do type checking and will generate a compling error, not coerrion occurs 
+
+Pointer types:
+holds an address in memory, every type has a associated pointer type, casting require to assign one pointer type to another. Generic pointer can hold address of any type (void* ) //unintializing pointer might or might not an error, if we ran into an error where we get different behavior at every run, it might cause by uninitalizing pointer
+Dont use generic pointer for everything to guard for type safety, the type prevent illegal operations that tight to a type
+static_cast will not work but using static_cast on generic pointer, it would work
