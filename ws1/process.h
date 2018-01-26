@@ -3,7 +3,7 @@
 
 #include "CString.h"
 
-void toProcess (const char* string, int max);
+void toProcess(const char* string, int max);
 
 
 #endif

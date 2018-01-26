@@ -13,12 +13,13 @@ namespace w1 {
 
 	CString::CString(const char* cs, int max) {
 
-	//	cout << "Constructor" << endl;
+		//	cout << "Constructor" << endl;
 		if (cs != nullptr) {
 			m_numOfChars = max;
 			maxChars = m_numOfChars;
 			m_string = new char[m_numOfChars + 1];
 			strncpy(m_string, cs, m_numOfChars);
+			m_string[m_numOfChars] = '\0';
 		}
 		else {
 			*this = CString();
@@ -26,7 +27,7 @@ namespace w1 {
 	}
 
 	CString::~CString() {
-	//	cout << "Destructor" << endl;
+		//	cout << "Destructor" << endl;
 		delete[] m_string;
 	}
 
@@ -35,9 +36,9 @@ namespace w1 {
 	}
 
 	std::ostream& operator<< (std::ostream& os, const CString& cs) {
-		
+
 		cs.display(os);
 		return os;
-}
+	}
 
 }
