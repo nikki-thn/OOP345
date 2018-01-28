@@ -1,22 +1,37 @@
+/* \file w1.cpp
+ * \brief This program will take in command line arguments and echo 
+ * to user the first 3 characters of each argument
+ * \author [Nikki Truong - 112 314 174 - OOP345 - Section C]
+ * \date [Jan 28, 2018]
+*/
+
 #include<iostream>
 #include"process.h"
 
 int main(int argc, char*argv[]) {
 
-	int max = 0;
+	/*! Check condition, only proceed if number of command line arguments
+	 * is greater than 1
+	*/
 	if (argc > 1) {
-		std::cout << "Maximum number of characaters stored: ";
-		std::cin >> max;
+		std::cout << "Maximum number of characters stored: 3";
+
+		/* Loop through every argument and call \fn toProcess()
+		 * to extract the \var MAX characters to print out
+		*/
 		for (int i = 1; i <= argc - 1; i++) {
 			std::cout << (i - 1) << ":";
-			std::cout.width(3);
-			toProcess(argv[i], max);
+			toProcess(argv[i]);
 		}
 	}
-	else if (argc == 1) {
+	//! If number of argument is equal to one, display error message
+	else if (argc == 1) { 
 		std::cout << "Insufficient number of arguments (min 1)" << std::endl;
+		//! \return [exit code 1 when insuffiencient number of arguments]
+		return 1;
 	}
 
+	//! \return [exit code 0 on sucessful processing]
 	return 0;
 
 }
