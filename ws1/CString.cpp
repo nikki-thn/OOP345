@@ -1,42 +1,47 @@
+/*!
+* \class [CString]
+* \brief [class CString takes in a string, exact and store \var MAX characters]
+* [class CString will take in a string, exact and only store the \var MAX characters
+* as its data member]
+* \author [Nikki Truong - 112 314 174 - OOP345 - Section C]
+* \date [Jan 28, 2018]
+*/
+
 #include <iostream>
 #include"CString.h"
 
-int maxChars;
-using namespace std;
-
 namespace w1 {
 
+	//! \fn Default Constructor
 	CString::CString() {
-		m_numOfChars = 0;
 		m_string = nullptr;
 	}
 
-	CString::CString(const char* cs, int max) {
+	//! \fn One Parameter Constructor
+	CString::CString(const char* cs) {
 
-		//	cout << "Constructor" << endl;
 		if (cs != nullptr) {
-			m_numOfChars = max;
-			maxChars = m_numOfChars;
-			m_string = new char[m_numOfChars + 1];
-			strncpy(m_string, cs, m_numOfChars);
-			m_string[m_numOfChars] = '\0';
+			m_string = new char[MAX + 1];
+			strncpy(m_string, cs, MAX);
+			m_string[MAX] = '\0';
 		}
 		else {
 			*this = CString();
 		}
 	}
 
+	//! \fn Destructor
 	CString::~CString() {
-		//	cout << "Destructor" << endl;
 		delete[] m_string;
 	}
 
+	//! \fn display()
 	void CString::display(std::ostream& os) const {
 		std::cout << m_string << std::endl;
 	}
 
+	//! \fn helper overload operator<<
 	std::ostream& operator<< (std::ostream& os, const CString& cs) {
-
 		cs.display(os);
 		return os;
 	}
