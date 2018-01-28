@@ -14,7 +14,7 @@ int main(int argc, char*argv[]) {
 	 * is greater than 1
 	*/
 	if (argc > 1) {
-		std::cout << "Maximum number of characters stored: 3";
+		std::cout << "Maximum number of characters stored: 3\n";
 
 		/* Loop through every argument and call \fn toProcess()
 		 * to extract the \var MAX characters to print out
