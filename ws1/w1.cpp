@@ -8,7 +8,7 @@
 #include<iostream>
 #include"process.h"
 
-const int MAX = 5;
+const int w1::MAX = 5;  //!< \var int MAX is maximum number of characters being displayed
 
 int main(int argc, char*argv[]) {
 
@@ -16,7 +16,7 @@ int main(int argc, char*argv[]) {
 	* is greater than 1
 	*/
 	if (argc > 1) {
-		std::cout << "Maximum number of characters stored: " << MAX << "\n";
+		std::cout << "Maximum number of characters stored: " << w1::MAX << "\n";
 
 		/* Loop through every argument and call \fn toProcess()
 		* to extract the \var MAX characters to print out
