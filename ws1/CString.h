@@ -11,10 +11,12 @@
 
 #include<iostream>
 
+
+
+extern const int MAX; //!< \var int MAX is maximum number of characters being displayed
+
 namespace w1 {
 
-	const int MAX = 3; //!< \var int MAX is maximum number of characters being displayed
-	
 	class CString {
 
 		char* m_string; //!< \brief private member to store the processed string
@@ -22,14 +24,14 @@ namespace w1 {
 	public:
 
 		/*! \fn Default Constructor
-		 * Takes in zero parameter and initlize m_string to null
+		* Takes in zero parameter and initlize m_string to null
 		*/
 		CString();
 
-	    /*! \fn One parameter constructor
-		 * \param[in] [string] [a C-type string that is passed to be exact]
+		/*! \fn One parameter constructor
+		* \param[in] [string] [a C-type string that is passed to be exact]
 		*/
-		CString(const char* string); 
+		CString(const char* string);
 
 		/*! \fn Destructor
 		* \brief Clean up memory
@@ -43,7 +45,7 @@ namespace w1 {
 		void display(std::ostream& os) const;
 	};
 
-	/*! \fn overload of operator<< for \class CString 
+	/*! \fn overload of operator<< for \class CString
 	* \para[in] [os] [takes in a reference of ostream to display the string
 	* to output stream]
 	*/
