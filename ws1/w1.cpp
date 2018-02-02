@@ -1,23 +1,25 @@
 /* \file w1.cpp
- * \brief This program will take in command line arguments and echo 
- * to user the first 3 characters of each argument
- * \author [Nikki Truong - 112 314 174 - OOP345 - Section C]
- * \date [Jan 28, 2018]
+* \brief This program will take in command line arguments and echo
+* to user the first 3 characters of each argument
+* \author [Nikki Truong - 112 314 174 - OOP345 - Section C]
+* \date [Jan 28, 2018]
 */
 
 #include<iostream>
 #include"process.h"
 
+const int MAX = 5;
+
 int main(int argc, char*argv[]) {
 
 	/*! Check condition, only proceed if number of command line arguments
-	 * is greater than 1
+	* is greater than 1
 	*/
 	if (argc > 1) {
-		std::cout << "Maximum number of characters stored: 3\n";
+		std::cout << "Maximum number of characters stored: " << MAX << "\n";
 
 		/* Loop through every argument and call \fn toProcess()
-		 * to extract the \var MAX characters to print out
+		* to extract the \var MAX characters to print out
 		*/
 		for (int i = 1; i <= argc - 1; i++) {
 			std::cout << (i - 1) << ":";
@@ -25,7 +27,7 @@ int main(int argc, char*argv[]) {
 		}
 	}
 	//! If number of argument is equal to one, display error message
-	else if (argc == 1) { 
+	else if (argc == 1) {
 		std::cout << "Insufficient number of arguments (min 1)" << std::endl;
 		//! \return [exit code 1 when insuffiencient number of arguments]
 		return 1;
