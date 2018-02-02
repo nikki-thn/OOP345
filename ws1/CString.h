@@ -11,11 +11,11 @@
 
 #include<iostream>
 
-
+namespace w1 {
 
 extern const int MAX; //!< \var int MAX is maximum number of characters being displayed
 
-namespace w1 {
+
 
 	class CString {
 
