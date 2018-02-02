@@ -1,3 +1,9 @@
+/* \file w2.cpp
+* \brief This program will implement the copy and move semantics to manage a class with a resource
+* \author [Nikki Truong - 112 314 174 - OOP345 - Section C]
+* \date [Feb 02, 2018]
+*/
+
 // Workshop 3 - Copy and Move Semantics
 // w3.cpp
 
