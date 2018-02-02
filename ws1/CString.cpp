@@ -8,6 +8,7 @@
 */
 
 #include <iostream>
+#include <cstring>
 #include"CString.h"
 
 namespace w1 {
