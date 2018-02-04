@@ -1,8 +1,4 @@
-/* \file w2.cpp
-* \brief This program will implement the copy and move semantics to manage a class with a resource
-* \author [Nikki Truong - 112 314 174 - OOP345 - Section C]
-* \date [Feb 02, 2018]
-*/
+
 
 // Workshop 3 - Copy and Move Semantics
 // w3.cpp
@@ -14,23 +10,16 @@
 #include "Text.h"
 #define TIME(start, end) double((end) - (start)) / CLOCKS_PER_SEC
 
-
 int main(int argc, char* argv[]) {
 
 	if (argc == 1) {
 		std::cerr << argv[0] << ": missing file operand\n";
 		return 1;
 	}
-
 	else if (argc != 2) {
 		std::cerr << argv[0] << ": too many arguments\n";
 		return 2;
 	}
-
-	//w3::Text b(argv[1]);
-	//
-	//b.display();
-
 	std::clock_t cs, ce;
 	{
 		std::cout << std::fixed << std::setprecision(3);
@@ -63,7 +52,7 @@ int main(int argc, char* argv[]) {
 		ce = std::clock();
 		std::cout << "Copy Constructor " << TIME(cs, ce) << " seconds";
 		std::cout << " - c.size = " << c.size() << std::endl;
-	
+
 		cs = std::clock();
 		w3::Text d = std::move(a);
 		ce = std::clock();
