@@ -27,13 +27,13 @@ namespace w3 {
 
 		Text(); //! Default constructor
 		Text(const char*); //! One parameter constructor
-		~Text(); //destructor
+		~Text(); //! destructor
 		Text(const Text&); //! Copy constructor
 		Text(Text&&); //! Move constructor
 		Text& operator= (const Text&); //! Copy operator
 		Text&& operator= (Text&&); //! Move operator
 
-		size_t size() const { return m_size; } //! Function return the size of string array
+		size_t size() const; //! Function return the size of string array
 
 	};
 }
