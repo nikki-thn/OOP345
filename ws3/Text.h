@@ -23,7 +23,7 @@ namespace w3 {
 		Text(const char*); // One parameter constructor
 		~Text(); // destructor
 		Text(const Text&); // Copy constructor
-		Text(Text&&); //! Move constructor
+		Text(Text&&); // Move constructor
 		Text& operator= (const Text&); // Copy operator
 		Text&& operator= (Text&&); // Move operator
 
