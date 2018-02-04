@@ -13,7 +13,7 @@ using namespace std;
 
 namespace w3 {
 
-	//! Default constructor set memebers to safe-empty state 
+	/*! Default constructor set memebers to safe-empty state */
 	Text::Text() : m_fileName(nullptr), m_size(0), m_strings(nullptr) { }
 
 	/*! one parameter constructor take in file name as an argument
@@ -63,7 +63,7 @@ namespace w3 {
 		}
 	}
 
-	//! Destructor
+	/*! Destructor */
 	Text::~Text() { 
 
 		//clean up resources
@@ -71,14 +71,14 @@ namespace w3 {
 		delete[] m_strings;
 	}
 
-	//! Copy constructor
+	/*! Copy constructor */
 	Text::Text(const Text& rhs) { 
 		m_strings = nullptr;
 		m_fileName = nullptr;
 		*this = rhs; // Calling copy assignment to do the copying
 	}
 
-	//! Move constructor
+	/*! Move constructor */
 	Text::Text(Text&& rhs) {
 
 		// Copy filename
@@ -100,7 +100,7 @@ namespace w3 {
 		rhs.m_strings = nullptr;
 	}
 
-	 //! Copy operator
+	 /*! Copy operator */
 	Text& Text::operator= (const Text& rhs) {
 
 		if (this != &rhs) { // Check for self-assignment
@@ -127,7 +127,7 @@ namespace w3 {
 		return *this;
 	}
 
-	//! Move operator
+	/*! Move operator */
 	Text&& Text::operator= (Text&& rhs) {
 
 		if (&rhs != this) { // Check for self-assignment
@@ -148,6 +148,7 @@ namespace w3 {
 		return std::move(*this);
 	}
 	
-	size_t size() const { return m_size; } //! Function return the size of string array
+	 /*! Function return the size of string array*/
+	size_t size() const { return m_size; }
 
 }
