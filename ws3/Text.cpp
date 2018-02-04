@@ -148,7 +148,7 @@ namespace w3 {
 		return std::move(*this);
 	}
 	
-	 /*! Function return the size of string array*/
+	 /*! Function return the size of string array */
 	size_t size() const { return m_size; }
 
 }
