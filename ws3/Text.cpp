@@ -32,19 +32,19 @@ namespace w3 {
 			char temp[200];
 			int size = 0;
 
-			//! count the lines to allocate memory
+			// count the lines to allocate memory
 			while (!file.eof()) {
 				file.getline(temp, 100, '\n');
 				size++;
 			}
 
-			//! reset position to read in from the beginning
+			// reset position to read in from the beginning
 			file.seekg(0);
 
-			//! Copy the size to m_size member
+			// Copy the size to m_size member
 			m_size = size;
 
-			//! allocate dynamic memory for the text
+			// allocate dynamic memory for the text
 			m_strings = new string[m_size];
 			
 			//! Copy each line of text into a string 
@@ -53,12 +53,12 @@ namespace w3 {
 				m_strings[i] = temp;
 			}
 
-			//! close file after finish reading
+			// close file after finish reading
 			file.close();
 		}
 		else {
 
-			//! If file reading fails, set members to safe-empty state
+			// If file reading fails, set members to safe-empty state
 			*this = Text();
 		}
 	}
@@ -75,26 +75,26 @@ namespace w3 {
 	Text::Text(const Text& rhs) { 
 		m_strings = nullptr;
 		m_fileName = nullptr;
-		*this = rhs; //! Calling copy assignment to do the copying
+		*this = rhs; // Calling copy assignment to do the copying
 	}
 
 	//! Move constructor
 	Text::Text(Text&& rhs) {
 
-		//! Copy filename
+		// Copy filename
 		m_fileName = new char[strlen(rhs.m_fileName) + 1];
 		strcpy(m_fileName, rhs.m_fileName);
 
-		//! Copy size
+		// Copy size
 		m_size = rhs.m_size;
 
-		//!Copy the string array
+		//Copy the string array
 		m_strings = new string[m_size];
 		for (int i = 0; i < m_size; i++) {
 			m_strings[i] = rhs.m_strings[i];
 		}
 
-		//clean up resources
+		// clean up resources
 		rhs.m_fileName = nullptr;
 		rhs.m_size = 0;
 		rhs.m_strings = nullptr;
@@ -102,19 +102,19 @@ namespace w3 {
 
 	Text& Text::operator= (const Text& rhs) { //copy operator
 
-		if (this != &rhs) { //! Check for self-assignment
+		if (this != &rhs) { // Check for self-assignment
 
-			//!copy non-resource member
+			// copy non-resource member
 			m_size = rhs.m_size;
 
 			if (rhs.m_strings != nullptr && rhs.m_fileName != nullptr) {
 
-				//! Dealloacte old memory and allocate new resource for copy
+				// Dealloacte old memory and allocate new resource for copy
 				delete[] m_fileName;
 				m_fileName = new char[strlen(rhs.m_fileName) + 1];
 				strcpy(m_fileName, rhs.m_fileName);
 
-				//! Dealloacte old memory and allocate new resource for copy
+				// Dealloacte old memory and allocate new resource for copy
 				delete[] m_strings;
 				m_strings = new string[m_size];
 				for (int i = 0; i < m_size; i++) {
@@ -129,9 +129,9 @@ namespace w3 {
 	//! Move operator
 	Text&& Text::operator= (Text&& rhs) {
 
-		if (&rhs != this) { //! Check for self-assignment
+		if (&rhs != this) { // Check for self-assignment
 
-			//! Transfer over from one object to another
+			// Transfer over from one object to another
 			strcpy(m_fileName, rhs.m_fileName);
 			m_size = rhs.m_size;
 			for (int i = 0; i < m_size; i++) {
