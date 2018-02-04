@@ -1,9 +1,3 @@
-/* \file Textg.h
-* \brief header file for \class Text class which process a text file , store and display it
-* \author [Nikki Truong - 112 314 174 - OOP345 - Section C]
-* \date [Jan 28, 2018]
-*/
-
 /*! \file Text.h
 * This program will implement the copy and move semantics to manage a class with a resource
 * \author [Nikki Truong - 112 314 174 - OOP345 - Section C]
@@ -19,21 +13,21 @@ namespace w3 {
 
 	class Text {
 
-		char* m_fileName; //! store the fileName of the text file
-		size_t m_size; //! store the size (number of lines) of the text file
-		std::string* m_strings; //! a pointer to String which will be used to store the content of the text file
+		char* m_fileName; // store the fileName of the text file
+		size_t m_size; // store the size (number of lines) of the text file
+		std::string* m_strings; // a pointer to String which will be used to store the content of the text file
 
 	public:
 
-		Text(); //! Default constructor
-		Text(const char*); //! One parameter constructor
-		~Text(); //! destructor
-		Text(const Text&); //! Copy constructor
+		Text(); // Default constructor
+		Text(const char*); // One parameter constructor
+		~Text(); // destructor
+		Text(const Text&); // Copy constructor
 		Text(Text&&); //! Move constructor
-		Text& operator= (const Text&); //! Copy operator
-		Text&& operator= (Text&&); //! Move operator
+		Text& operator= (const Text&); // Copy operator
+		Text&& operator= (Text&&); // Move operator
 
-		size_t size() const; //! Function return the size of string array
+		size_t size() const; // Function return the size of string array
 
 	};
 }
