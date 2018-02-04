@@ -47,7 +47,7 @@ namespace w3 {
 			// allocate dynamic memory for the text
 			m_strings = new string[m_size];
 			
-			//! Copy each line of text into a string 
+			// Copy each line of text into a string 
 			for (int i = 0; i < m_size; i++) {
 				file.getline(temp, 100, '\n');
 				m_strings[i] = temp;
@@ -100,7 +100,8 @@ namespace w3 {
 		rhs.m_strings = nullptr;
 	}
 
-	Text& Text::operator= (const Text& rhs) { //copy operator
+	 //! Copy operator
+	Text& Text::operator= (const Text& rhs) {
 
 		if (this != &rhs) { // Check for self-assignment
 
@@ -146,5 +147,7 @@ namespace w3 {
 
 		return std::move(*this);
 	}
+	
+	size_t size() const { return m_size; } //! Function return the size of string array
 
 }
