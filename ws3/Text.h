@@ -28,7 +28,6 @@ namespace w3 {
 		Text&& operator= (Text&&); // Move operator
 
 		size_t size() const; // Function return the size of string array
-
 	};
 }
 
