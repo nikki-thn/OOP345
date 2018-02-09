@@ -7,7 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
-#include"Text.h"
+#include "Text.h"
 
 using namespace std;
 
@@ -17,7 +17,10 @@ namespace w3 {
 	Text::Text() : m_fileName(nullptr), m_size(0), m_strings(nullptr) { }
 
 	/*! one parameter constructor take in file name as an argument
-	 * When being called, it will stream in the text file into array of strings
+	* When being called, it will stream in the text file into array of strings
+	*/
+	/*!
+	\param C-style string storing the name of the text file
 	*/
 	Text::Text(const char* filename) {
 
@@ -46,7 +49,7 @@ namespace w3 {
 
 			// allocate dynamic memory for the text
 			m_strings = new string[m_size];
-			
+
 			// Copy each line of text into a string 
 			for (int i = 0; i < m_size; i++) {
 				file.getline(temp, 100, '\n');
@@ -64,7 +67,7 @@ namespace w3 {
 	}
 
 	/*! Destructor */
-	Text::~Text() { 
+	Text::~Text() {
 
 		//clean up resources
 		delete[] m_fileName;
@@ -72,7 +75,7 @@ namespace w3 {
 	}
 
 	/*! Copy constructor */
-	Text::Text(const Text& rhs) { 
+	Text::Text(const Text& rhs) {
 		m_strings = nullptr;
 		m_fileName = nullptr;
 		*this = rhs; // Calling copy assignment to do the copying
@@ -81,18 +84,10 @@ namespace w3 {
 	/*! Move constructor */
 	Text::Text(Text&& rhs) {
 
-		// Copy filename
-		m_fileName = new char[strlen(rhs.m_fileName) + 1];
-		strcpy(m_fileName, rhs.m_fileName);
-
-		// Copy size
+		// Transfer filename, size, and pointer to the string array
+		m_fileName = rhs.m_fileName;
 		m_size = rhs.m_size;
-
-		//Copy the string array
-		m_strings = new string[m_size];
-		for (int i = 0; i < m_size; i++) {
-			m_strings[i] = rhs.m_strings[i];
-		}
+		m_strings = rhs.m_strings;
 
 		// clean up resources
 		rhs.m_fileName = nullptr;
@@ -100,7 +95,7 @@ namespace w3 {
 		rhs.m_strings = nullptr;
 	}
 
-	 /*! Copy operator */
+	/*! Copy operator */
 	Text& Text::operator= (const Text& rhs) {
 
 		if (this != &rhs) { // Check for self-assignment
@@ -132,13 +127,11 @@ namespace w3 {
 
 		if (&rhs != this) { // Check for self-assignment
 
-			// Transfer over from one object to another
-			strcpy(m_fileName, rhs.m_fileName);
+			// Transfer over from one object to another, copy pinter is fine
+			m_fileName = rhs.m_fileName;
 			m_size = rhs.m_size;
-			for (int i = 0; i < m_size; i++) {
-				m_strings[i] = rhs.m_strings[i];
-			}
-
+			m_strings = rhs.m_strings;
+			
 			//Clean up 
 			rhs.m_fileName = nullptr;
 			rhs.m_size = 0;
@@ -147,8 +140,11 @@ namespace w3 {
 
 		return std::move(*this);
 	}
-	
-	 /*! Function return the size of string array */
-	size_t size() const { return m_size; }
+
+	//! Function return the size of string array 
+	/*!
+	  \return interger storing size of the string array
+	*/
+	size_t Text::size() const { return m_size; }
 
 }
