@@ -1,66 +1,151 @@
-
-
-// Workshop 3 - Copy and Move Semantics
-// w3.cpp
+/*! \file Text.cpp
+* This program will implement the copy and move semantics to manage a class with a resource
+* \author [Nikki Truong - 112 314 174 - OOP345 - Section C]
+* \date [Feb 02, 2018]
+*/
 
 #include <iostream>
-#include <iomanip>
-#include <utility>
-#include <ctime>
+#include <fstream>
+#include <cstring>
 #include "Text.h"
-#define TIME(start, end) double((end) - (start)) / CLOCKS_PER_SEC
 
-int main(int argc, char* argv[]) {
+using namespace std;
 
-	if (argc == 1) {
-		std::cerr << argv[0] << ": missing file operand\n";
-		return 1;
+namespace w3 {
+
+
+	/*! Default constructor set memebers to safe-empty state */
+	Text::Text() : m_fileName(nullptr), m_size(0), m_strings(nullptr) { }
+
+	/*! one parameter constructor take in file name as an argument
+	* When being called, it will stream in the text file into array of strings
+	*/
+	/*!
+	\param C-style string storing the name of the text file
+	*/
+	Text::Text(const char* filename) {
+
+		m_fileName = new char[strlen(filename) + 1];
+		strcpy(m_fileName, filename);
+
+		fstream file;
+		file.open(m_fileName, ios::in);
+
+		if (file.is_open() && !file.fail()) {
+
+			char temp[200];
+			int size = 0;
+
+			// count the lines to allocate memory
+			while (!file.eof()) {
+				file.getline(temp, 100, '\n');
+				size++;
+			}
+
+			// reset position to read in from the beginning
+			file.seekg(0);
+
+			// Copy the size to m_size member
+			m_size = size;
+
+			// allocate dynamic memory for the text
+			m_strings = new string[m_size];
+
+			// Copy each line of text into a string 
+			for (int i = 0; i < m_size; i++) {
+				file.getline(temp, 100, '\n');
+				m_strings[i] = temp;
+			}
+
+			// close file after finish reading
+			file.close();
+		}
+		else {
+
+			// If file reading fails, set members to safe-empty state
+			*this = Text();
+		}
 	}
-	else if (argc != 2) {
-		std::cerr << argv[0] << ": too many arguments\n";
-		return 2;
+
+	/*! Destructor */
+	Text::~Text() {
+
+		//clean up resources
+		delete[] m_fileName;
+		delete[] m_strings;
 	}
-	std::clock_t cs, ce;
-	{
-		std::cout << std::fixed << std::setprecision(3);
-		cs = std::clock();
-		w3::Text a;
-		ce = std::clock();
-		std::cout << "Constructor      " << TIME(cs, ce) << " seconds";
-		std::cout << " - a.size = " << a.size() << std::endl;
 
-		cs = std::clock();
-		w3::Text b(argv[1]);
-		ce = std::clock();
-		std::cout << "Constructor      " << TIME(cs, ce) << " seconds";
-		std::cout << " - b.size = " << b.size() << std::endl;
-
-		cs = std::clock();
-		a = b;
-		ce = std::clock();
-		std::cout << "Copy Assignment  " << TIME(cs, ce) << " seconds";
-		std::cout << " - a.size = " << a.size() << std::endl;
-
-		cs = std::clock();
-		a = std::move(b);
-		ce = std::clock();
-		std::cout << "Move Assignment  " << TIME(cs, ce) << " seconds";
-		std::cout << " - a.size = " << a.size() << std::endl;
-
-		cs = std::clock();
-		w3::Text c = a;
-		ce = std::clock();
-		std::cout << "Copy Constructor " << TIME(cs, ce) << " seconds";
-		std::cout << " - c.size = " << c.size() << std::endl;
-
-		cs = std::clock();
-		w3::Text d = std::move(a);
-		ce = std::clock();
-		std::cout << "Move Constructor " << TIME(cs, ce) << " seconds";
-		std::cout << " - d.size = " << d.size() << std::endl;
-
-		cs = std::clock();
+	/*! Copy constructor */
+	Text::Text(const Text& rhs) {
+		m_strings = nullptr;
+		m_fileName = nullptr;
+		*this = rhs; // Calling copy assignment to do the copying
 	}
-	ce = std::clock();
-	std::cout << "Destructor       " << TIME(cs, ce) << " seconds\n";
+
+	/*! Move constructor */
+	Text::Text(Text&& rhs) {
+
+		// Transfer filename, size, and pointer to the string array
+		m_fileName = rhs.m_fileName;
+		m_size = rhs.m_size;
+		m_strings = rhs.m_strings;
+
+		// clean up resources
+		rhs.m_fileName = nullptr;
+		rhs.m_size = 0;
+		rhs.m_strings = nullptr;
+	}
+
+	/*! Copy operator */
+	Text& Text::operator= (const Text& rhs) {
+
+		if (this != &rhs) { // Check for self-assignment
+
+			// copy non-resource member
+			m_size = rhs.m_size;
+
+			if (rhs.m_strings != nullptr && rhs.m_fileName != nullptr) {
+
+				// Dealloacte old memory and allocate new resource for copy
+				delete[] m_fileName;
+				m_fileName = new char[strlen(rhs.m_fileName) + 1];
+				strcpy(m_fileName, rhs.m_fileName);
+
+				// Dealloacte old memory and allocate new resource for copy
+				delete[] m_strings;
+				m_strings = new string[m_size];
+				for (int i = 0; i < m_size; i++) {
+					m_strings[i] = rhs.m_strings[i];
+				}
+			}
+		}
+
+		return *this;
+	}
+
+	/*! Move operator */
+	Text&& Text::operator= (Text&& rhs) {
+
+		if (&rhs != this) { // Check for self-assignment
+
+			// Transfer over from one object to another, copy pinter is fine
+			m_fileName = rhs.m_fileName;
+			m_size = rhs.m_size;
+			m_strings = rhs.m_strings;
+			
+			//Clean up 
+			rhs.m_fileName = nullptr;
+			rhs.m_size = 0;
+			rhs.m_strings = nullptr;
+		}
+
+		return std::move(*this);
+	}
+
+	//! Function return the size of string array 
+	/*!
+	  \return interger storing size of the string array
+	*/
+	size_t Text::size() const { return m_size; }
+
 }
