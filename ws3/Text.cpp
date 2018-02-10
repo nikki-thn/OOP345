@@ -1,8 +1,19 @@
-/*! \file Text.cpp
+/*! *********************************************************
+* OOP345 Workshop 2: Copy and Move Semantic
+* File Text.cpp
+* Version 1.0
+* \date Feb 4, 2018
+* \author Nikki Truong - 112 314 174
+* Description
 * This program will implement the copy and move semantics to manage a class with a resource
-* \author [Nikki Truong - 112 314 174 - OOP345 - Section C]
-* \date [Feb 02, 2018]
-*/
+*
+*
+* Revision History
+************************************************************
+* Name     Date              Reason
+* V1.3     Feb 10, 2018      Fixed move constructor/assignment syntax
+			     Add parameter and return conmments for doxygen
+***********************************************************/
 
 #include <iostream>
 #include <fstream>
@@ -141,7 +152,7 @@ namespace w3 {
 		return std::move(*this);
 	}
 
-	//! Function return the size of string array 
+	/*! Function return the size of string array */
 	/*!
 	  \return interger storing size of the string array
 	*/

@@ -1,8 +1,12 @@
-/*! \file Text.h
+/*! *********************************************************
+* OOP345 Workshop 2: Copy and Move Semantic
+* File: Text.h
+* Version: 1.0
+* \date Feb 4, 2018
+* \author Nikki Truong - 112 314 174
+* Description
 * This program will implement the copy and move semantics to manage a class with a resource
-* \author [Nikki Truong - 112 314 174 - OOP345 - Section C]
-* \date [Feb 02, 2018]
-*/
+***********************************************************/
 
 
 #ifndef W3_TEXT_H

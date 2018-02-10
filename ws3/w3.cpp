@@ -128,7 +128,7 @@ namespace w3 {
 
 		if (&rhs != this) { // Check for self-assignment
 
-			// Transfer over from one object to another, copy pinter is fine
+			// Transfer over from one object to another, copy pointer is fine
 			m_fileName = rhs.m_fileName;
 			m_size = rhs.m_size;
 			m_strings = rhs.m_strings;
@@ -142,7 +142,7 @@ namespace w3 {
 		return std::move(*this);
 	}
 
-	//! Function return the size of string array 
+	/*! Function return the size of string array */
 	/*!
 	  \return interger storing size of the string array
 	*/
