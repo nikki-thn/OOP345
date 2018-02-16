@@ -10,7 +10,7 @@ namespace w5 {
 		if (!in.fail()) {
 			char temp[100];
 			in.getline(temp, 200, c);
-			
+
 			m_message = temp;
 		}
 		else *this = Message();
@@ -31,7 +31,7 @@ namespace w5 {
 		}
 
 		msg.m_message.clear();
-		return std::move( *this);
+		return std::move(*this);
 	}
 
 	// -returns true if the object is in a safe empty state
@@ -42,7 +42,7 @@ namespace w5 {
 		}
 		return isEmpty;
 	}
-	
+
 	// displays the Message objects within the container
 	void Message::display(std::ostream& out) const {
 		out << m_message;

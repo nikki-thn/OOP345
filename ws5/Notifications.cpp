@@ -48,9 +48,12 @@ namespace w5 {
 
 	//- adds msg to the set
 	void Notifications::operator+=(const Message& msg) {
+
 		int index = -1;
+
 		for (int i = 0; i < ARRAY_SIZE; i++) {
-			if(m_messages[i].empty()) {
+
+			if (m_messages[i].empty()) {
 				index = i;
 				break;
 			}

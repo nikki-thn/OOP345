@@ -13,7 +13,7 @@ namespace w5 {
 		Message m_messages[ARRAY_SIZE];
 
 	public:
-		Notifications() : m_messages() {} // default constructor - empty
+		Notifications() { } // default constructor - empty
 		Notifications(const Notifications&); // -copy constructor
 		Notifications& operator=(const Notifications&);// -copy assignment operator
 		Notifications(Notifications&&);// -move constructor
