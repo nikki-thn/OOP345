@@ -1,6 +1,5 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
+#include<iostream>
+#include<fstream>
 #include "Message.h"
 
 namespace w5 {
@@ -9,41 +8,44 @@ namespace w5 {
 	Message::Message(std::ifstream& in, char c) {
 
 		if (!in.fail()) {
+			char temp[100];
+			in.getline(temp, 200, c);
 
-			std::string temp;
-			getline(in, temp, c);
-
-			std::istringstream iss(temp);
-
-			if (temp.find_first_of('@') < temp.length()) {
-				getline(iss, m_message[User], '@');
-				getline(iss, m_message[Reply], ' ');
-				getline(iss, m_message[Tweet]);
-			}
-			else {
-				getline(iss, m_message[User], ' ');
-				getline(iss, m_message[Tweet]);
-				m_message[Reply] = "";
-			}	
+			m_message = temp;
 		}
 		else *this = Message();
 	}
 
+	//copy assignment
+	Message& Message::operator=(const Message& msg) {
+		if (this != &msg) {
+			m_message = msg.m_message;
+		}
+		return *this;
+	}
+
+	//move assignment
+	Message&& Message::operator=(Message&& msg) {
+		if (this != &msg) {
+			m_message = msg.m_message;
+		}
+
+		msg.m_message.clear();
+		return std::move(*this);
+	}
+
 	// -returns true if the object is in a safe empty state
-	bool Message::empty() const { return m_message[Tweet] == ""; 
+	bool Message::empty() const {
+		bool isEmpty = true;
+		if (m_message != "") {
+			isEmpty = false;
+		}
+		return isEmpty;
 	}
 
 	// displays the Message objects within the container
 	void Message::display(std::ostream& out) const {
-
-		out << "Message" << std::endl;
-		out << " User  : " << m_message[User] << std::endl;
-
-		if (m_message[Reply] != "") {
-			out << " Reply : " << m_message[Reply] << std::endl;
-		}
-
-		out << " Tweet : " << m_message[Tweet] << std::endl;
+		out << m_message;
 	}
 
 	std::ostream& operator<< (std::ostream& os, const Message& s) {

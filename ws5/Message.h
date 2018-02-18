@@ -8,8 +8,6 @@ namespace w5 {
 
 	class Message {
 
-		enum Component { User, Tweet, Reply };
-
 		std::string m_message[SIZE];
 
 	public:
