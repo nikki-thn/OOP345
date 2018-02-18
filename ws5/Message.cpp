@@ -1,53 +1,73 @@
-#include<iostream>
-#include<fstream>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 #include "Message.h"
 
 namespace w5 {
 
-	// -constructor retrieves a record from the in file object, parses the record(as described above) and stores its components in the Message object.c is the character that delimits each record	
+	/*! default constructor */
+	Message::Message() { }
+
+	/*! one parameter constructor take in file stream as an argument
+	* When being called, it will stream in the text file into array of strings
+	*/
+	/*!
+	\param takes in ifstream and a character delimiter
+	*/
 	Message::Message(std::ifstream& in, char c) {
 
+		//if file opens for read in sucessfully
 		if (!in.fail()) {
-			char temp[100];
-			in.getline(temp, 200, c);
 
-			m_message = temp;
+			//read in one line at a time
+			std::string temp;
+			getline(in, temp, c);
+
+			std::istringstream iss(temp);
+
+			//if the message has a Reply component
+			if (temp.find_first_of('@') < temp.length()) {
+				getline(iss, m_message[User], '@');
+				getline(iss, m_message[Reply], ' ');
+				getline(iss, m_message[Tweet]);
+			}
+			else {
+				getline(iss, m_message[User], ' ');
+				getline(iss, m_message[Tweet]);
+				m_message[Reply] = "";
+			}
+
 		}
-		else *this = Message();
+		else {
+			*this = Message();
+		}
 	}
 
-	//copy assignment
-	Message& Message::operator=(const Message& msg) {
-		if (this != &msg) {
-			m_message = msg.m_message;
-		}
-		return *this;
+	/* Copy Operator*/
+	void Message::operator= (const Message& rhs) {
+
+		m_message[User] = rhs.m_message[User];
+		m_message[Reply] = rhs.m_message[Reply];
+		m_message[Tweet] = rhs.m_message[Tweet];
 	}
 
-	//move assignment
-	Message&& Message::operator=(Message&& msg) {
-		if (this != &msg) {
-			m_message = msg.m_message;
-		}
+	/*! \return true if message is empty or imcomplete */
+	bool Message::empty() const { return m_message[Tweet] == ""; }
 
-		msg.m_message.clear();
-		return std::move(*this);
-	}
-
-	// -returns true if the object is in a safe empty state
-	bool Message::empty() const {
-		bool isEmpty = true;
-		if (m_message != "") {
-			isEmpty = false;
-		}
-		return isEmpty;
-	}
-
-	// displays the Message objects within the container
+	/*! displays the Message object with available components */
 	void Message::display(std::ostream& out) const {
-		out << m_message;
+
+		out << "Message" << std::endl;
+		out << " User  : " << m_message[User] << std::endl;
+
+		if (m_message[Reply] != "") {
+			out << " Reply : " << m_message[Reply] << std::endl;
+		}
+
+		out << " Tweet : " << m_message[Tweet] << std::endl;
 	}
 
+	/*! Overload for output operator<< */
 	std::ostream& operator<< (std::ostream& os, const Message& s) {
 		s.display(os);
 		return os;
