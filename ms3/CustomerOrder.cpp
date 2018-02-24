@@ -63,6 +63,7 @@ CustomerOrder::CustomerOrder(CustomerOrder&& order_) NOEXCEPT {
 	order_.product.clear();
 	order_.order = nullptr;
 	order_.nOrders = 0;
+
 }
 
 CustomerOrder&& CustomerOrder::operator=(CustomerOrder&& order_) NOEXCEPT {

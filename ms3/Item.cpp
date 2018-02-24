@@ -7,6 +7,7 @@
 size_t Item::field_width = 0;
 const size_t numToken = 5;
 
+
 Item::Item(const std::string& record_) {
 
 	code = 1;
@@ -20,9 +21,9 @@ Item::Item(const std::string& record_) {
 
 	for (size_t i = 0; i < numToken && more; i++) {
 		temp = exactToken.nextToken(record_, pos, more);
-		if (field_width < temp.length()) field_width = temp.length();
+		if (field_width < temp.length() && field_width < 13) field_width = temp.length();
 		if (!temp.empty()) tokens[i] = temp;
-
+		
 	}
 
 	if (!tokens[0].empty()) name = tokens[0];
@@ -38,8 +39,8 @@ Item::Item(const std::string& record_) {
 
 }
 
-Item& Item::operator++(int value) {
-	code += value;
+Item& Item::operator++(int value){ 
+	code += value; 
 	return *this;
 }
 
@@ -49,12 +50,12 @@ void Item::display(std::ostream& os, bool full) const {
 	//*** Width length wrong, ask!!!
 
 	os << std::setfill(' ');
-	os << std::left << std::setw(field_width) << name;
+	os << std::left << std::setw(field_width - CODE_WIDTH) << name;
 
 	os << std::right << " [" << std::setw(CODE_WIDTH) << std::setfill('0') << code << "] ";
 
 	if (full == true) {
 		os << "From " << std::setw(field_width) << std::left << std::setfill(' ') << filler << " To " << remover << std::endl;
-		os << std::right << std::setw(field_width + CODE_WIDTH + 4) << " : " << description << std::endl;
+		os << std::right << std::setw(field_width + 4) << " : " << description << std::endl;
 	}
 }

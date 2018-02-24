@@ -8,6 +8,7 @@
 #include <string>
 
 const unsigned int CODE_WIDTH = 5;
+//const unsigned int max_width = 13;
 
 class Item {
 

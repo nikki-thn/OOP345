@@ -7,6 +7,8 @@
 #include <string>
 #include <fstream>
 
+//extern const unsigned int max_width;
+
 class Utilities {
 
 	size_t field_width;           // maximum field width needed 
