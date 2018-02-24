@@ -4,7 +4,6 @@
 char Utilities::delimiter = '\n';
 const int max_width = 13;
 
-
 const std::string Utilities::nextToken(const std::string& str, size_t& next_pos, bool& more) {
 
 	std::string token, temp;
@@ -12,7 +11,7 @@ const std::string Utilities::nextToken(const std::string& str, size_t& next_pos,
 	if (next_pos < str.length()) {
 
 		temp = str.substr(next_pos);
-
+		
 		std::istringstream iss(temp);
 
 		getline(iss, token, delimiter);

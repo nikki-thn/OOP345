@@ -24,13 +24,11 @@ public:
 
 	void display(std::ostream&, bool = false) const;
 
-
-	int operator++(int) { return code++; }
+	Item& operator++(int);
 	bool empty() const { return name.empty(); }
 	unsigned int getCode() const { return code; }
 	const std::string& getName() const { return name; }
 	const std::string& getFiller() const { return filler; }
 	const std::string& getRemover() const { return remover; }
 	
-
 };
