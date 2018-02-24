@@ -99,11 +99,10 @@ void Task::display(std::ostream& os) const {
 		}
 		else {
 			os << "Task Name      :  " << std::setw(field_width + 3) << "[" + name + "]" << "[" << slots + "]"<< std::endl;
-			os << "  Continue to  :  " << std::setw(field_width + 6) << "[" + nextTask[passed] + "]" << "*** to be validated ***" << std::endl;
+			os << "  Continue to  :  " << std::setw(field_width + 3) << "[" + nextTask[passed] + "]" << "*** to be validated ***" << std::endl;
 
 			if (nextTask[redirect] != "") {
-				os << "  Redirect to  :  " << std::setw(field_width + 6) << "[" + nextTask[redirect] + "]" << "*** to be validated ***" << std::endl;
-
+				os << "  Redirect to  :  " << std::setw(field_width + 3) << "[" + nextTask[redirect] + "]" << "*** to be validated ***" << std::endl;
 			}
 		}
 

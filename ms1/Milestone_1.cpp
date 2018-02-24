@@ -11,7 +11,6 @@
 #include "Task.h"
 #include "Utilities.h"
 
-
 void loadFromFile(const char*, std::vector<Task>&, std::ostream&);
 
 int main(int argc, char** argv) {
@@ -25,11 +24,10 @@ int main(int argc, char** argv) {
 	std::cout << "Tasks File Specified          = " << argv[1] << "\n";
 	std::cout << "File Record Field Delimiter   = " << argv[2][0] << "\n\n";
 	Utilities::setDelimiter(argv[2][0]);
-
-	//end of command line processing
+	// end of command line processing
 
 	// Load, Accept and Display the Tasks
-	
+	//
 	std::cout << "\n*** Load and Accept the Tasks ***\n";
 	std::vector<Task> tasks;
 	loadFromFile(argv[1], tasks, std::cerr);
@@ -56,29 +54,28 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	//// Validate the Tasks
-	////
-	//std::cout << "\nValidating the Accepted Tasks\n-----------------------------\n";
-	//bool valid = true;
-	//for (auto i = 0u; i < tasks.size() && valid; i++) {
-	//	bool invalid = true;
-	//	for (auto j = 0u; j < tasks.size() && invalid; j++) {
-	//		if (tasks[i].validate(tasks[j]))
-	//			invalid = false;
-	//	}
-	//	valid = !invalid;
-	//}
-	//if (!valid)
-	//	std::cerr << "*** Not all Tasks have been validated ***\n";
-	//for (auto& t : tasks)
-	//	t.display(std::cout);
+	// Validate the Tasks
+	//
+	std::cout << "\nValidating the Accepted Tasks\n-----------------------------\n";
+	bool valid = true;
+	for (auto i = 0u; i < tasks.size() && valid; i++) {
+		bool invalid = true;
+		for (auto j = 0u; j < tasks.size() && invalid; j++) {
+			if (tasks[i].validate(tasks[j]))
+				invalid = false;
+		}
+		valid = !invalid;
+	}
+	if (!valid)
+		std::cerr << "*** Not all Tasks have been validated ***\n";
+	for (auto& t : tasks)
+		t.display(std::cout);
 
-	//Terminate	
-	//std::cout << "\nDone!\nPress Enter Key to Exit ... ";
-	//char c;
-	//std::cin.get(c);
-
-	return 0;
+	// Terminate
+	//
+	std::cout << "\nDone!\nPress Enter Key to Exit ... ";
+	char c;
+	std::cin.get(c);
 }
 
 void loadFromFile(const char* fileName, std::vector<Task>& taskSet, std::ostream& os) {
