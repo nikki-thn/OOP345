@@ -39,7 +39,7 @@
     <ClCompile Include="OrderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Milestone_3.cpp">
+    <ClCompile Include="Milestone_4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -79,5 +79,19 @@
     <None Include="CustomerOrders.dat">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="FishTankTasks.dat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="FishTankCustomerOrders.dat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="FishTankItems.dat">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Logfile.log">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

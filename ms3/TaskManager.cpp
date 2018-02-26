@@ -18,8 +18,7 @@ void TaskManager::validate(std::ostream& os) {
 	}
 }
 
-void TaskManager::validate(const ItemManager& itemManager, std::ostream& os)
-{
+void TaskManager::validate(const ItemManager& itemManager, std::ostream& os) {
 
 	for (auto& item : itemManager) {
 
@@ -42,7 +41,7 @@ void TaskManager::validate(const ItemManager& itemManager, std::ostream& os)
 	}
 }
 
-void TaskManager::display(std::ostream& os) const
+void TaskManager::display(std::ostream& os) const 
 {
 	for (auto& task : *this) {
 		task.display(os);

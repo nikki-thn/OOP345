@@ -23,7 +23,7 @@
     <ClCompile Include="CustomerOrder.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemManager.cpp" />
-    <ClCompile Include="Milestone_3.cpp" />
+    <ClCompile Include="Milestone_4.cpp" />
     <ClCompile Include="OrderManager.cpp" />
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskManager.cpp" />
@@ -41,8 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CustomerOrders.dat" />
+    <None Include="FishTankCustomerOrders.dat" />
+    <None Include="FishTankItems.dat" />
+    <None Include="FishTankTasks.dat" />
     <None Include="ItemList.dat" />
     <None Include="TaskList.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Logfile.log" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

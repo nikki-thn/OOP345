@@ -47,16 +47,13 @@ CustomerOrder::CustomerOrder(const std::string& record_) {
 	else throw std::string(record_ + "<-- *** no token found before the delimiter ***");
 }
 
+
 CustomerOrder::CustomerOrder(CustomerOrder&& order_) NOEXCEPT {
 
 	name = order_.name;
 	product = order_.product;
 	nOrders = order_.nOrders;
-	order = new CustomerItem[nOrders];
-
-	for (size_t i = 0; i < nOrders; i++) {
-		order[i] = order_.order[i];
-	}
+	order = order_.order;
 
 	//clean up old object
 	order_.name.clear();
@@ -72,11 +69,7 @@ CustomerOrder&& CustomerOrder::operator=(CustomerOrder&& order_) NOEXCEPT {
 		name = order_.name;
 		product = order_.product;
 		nOrders = order_.nOrders;
-		order = new CustomerItem[nOrders];
-
-		for (size_t i = 0; i < nOrders; i++) {
-			order[i] = order_.order[i];
-		}
+		order = order_.order;
 
 		//clean up old object
 		order_.name.clear();
@@ -88,13 +81,12 @@ CustomerOrder&& CustomerOrder::operator=(CustomerOrder&& order_) NOEXCEPT {
 	return std::move(*this);
 }
 
-CustomerOrder::~CustomerOrder()
-{
+CustomerOrder::~CustomerOrder() {
 	delete[] order;
 }
 
-const std::string& CustomerOrder::operator[](unsigned int index_) const
-{
+const std::string& CustomerOrder::operator[](unsigned int index_) const {
+
 	int index = 0;
 	if (index_ <= nOrders) {
 		index = index_;
@@ -106,22 +98,19 @@ const std::string& CustomerOrder::operator[](unsigned int index_) const
 
 void CustomerOrder::fill(Item& item_) {
 
-	for (size_t i = 0; i < nOrders; i++)
-	{
-		if (order[i].asksFor(item_))
-		{
+	for (size_t i = 0; i < nOrders; i++) {
+
+		if (order[i].asksFor(item_)) {
 			order[i].fill(item_.getCode());
 			item_++;
 		}
 	}
 }
 
-void CustomerOrder::remove(Item& item)
-{
-	for (size_t i = 0; i < nOrders; i++)
-	{
-		if (order[i].getName() == item.getName())
-		{
+void CustomerOrder::remove(Item& item) {
+
+	for (size_t i = 0; i < nOrders; i++) {
+		if (order[i].getName() == item.getName()) {
 			nOrders--;
 		}
 	}
@@ -134,7 +123,8 @@ void CustomerOrder::display(std::ostream& os) const {
 	os.setf(std::ios::left);
 	os << name << " :  " << product << std::endl;
 	os.unsetf(std::ios::left);
-	
-	for (unsigned int i = 0; i < nOrders; i++)
+
+	for (unsigned int i = 0; i < nOrders; i++) {
 		order[i].display(os);
+	}
 }

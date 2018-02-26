@@ -22,7 +22,7 @@ Item::Item(const std::string& record_) {
 		temp = exactToken.nextToken(record_, pos, more);
 		if (field_width < temp.length()) field_width = temp.length();
 		if (!temp.empty()) tokens[i] = temp;
-
+		
 	}
 
 	if (!tokens[0].empty()) name = tokens[0];
@@ -38,8 +38,8 @@ Item::Item(const std::string& record_) {
 
 }
 
-Item& Item::operator++(int value) {
-	code += value;
+Item& Item::operator++(int value){ 
+	code += value; 
 	return *this;
 }
 
