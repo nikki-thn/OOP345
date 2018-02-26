@@ -1,0 +1,319 @@
+ Command Line Arguments
+ ----------------------
+ Task File Specified           = FishTankTasks.dat
+ Customer Order File Specified = FishTankCustomerOrders.dat 
+ Item File Specified           = FishTankItems.dat
+ Entry Task                    = SetupTank
+ Pause After n steps         n = 500
+ File Record Field Delimiter   = ,
+ Log File                      = FTLine.log
+
+ Building the Assembly Line
+ --------------------------
+ Task Name    : [SetupTank]         [2]
+  Continue to : [AddGravel]         *** to be validated ***
+  Item to add : ---
+ Task Name    : [RemoveTank]        [1]
+  Continue to : [SetupTank]         *** to be validated ***
+  Item to add : ---
+ Task Name    : [AddGravel]         [5]
+  Continue to : [AssembleFilter]    *** to be validated ***
+  Redirect to : [RemoveGravel]      *** to be validated ***
+  Item to add : ---
+ Task Name    : [RemoveGravel]      [1]
+  Continue to : [AddGravel]         *** to be validated ***
+  Item to add : ---
+ Task Name    : [AssembleFilter]    [5]
+  Continue to : [InstallLighting]   *** to be validated ***
+  Redirect to : [DisassembleFilter] *** to be validated ***
+  Item to add : ---
+ Task Name    : [DisassembleFilter] [1]
+  Continue to : [AssembleFilter]    *** to be validated ***
+  Item to add : ---
+ Task Name    : [InstallLighting]   [2]
+  Continue to : [AddHeater]         *** to be validated ***
+  Redirect to : [ReplaceLighting]   *** to be validated ***
+  Item to add : ---
+ Task Name    : [ReplaceLighting]   [1]
+  Continue to : [InstallLighting]   *** to be validated ***
+  Item to add : ---
+ Task Name    : [AddHeater]         [5]
+  Continue to : [AddWater]          *** to be validated ***
+  Redirect to : [RemoveHeater]      *** to be validated ***
+  Item to add : ---
+ Task Name    : [RemoveHeater]      [1]
+  Continue to : [AddHeater]         *** to be validated ***
+  Item to add : ---
+ Task Name    : [AddWater]          [5]
+ Continue to : [AddRocks]          *** to be validated ***
+  Redirect to : [DrainWater]        *** to be validated ***
+  Item to add : ---
+Task Name    : [DrainWater]        [1]
+  Continue to : [AddWater]          *** to be validated ***
+  Item to add : ---
+ Task Name    : [AddRocks]          [8]
+  Continue to : [AddFish]           *** to be validated ***
+  Redirect to : [RemoveRocks]       *** to be validated ***
+  Item to add : ---
+ Task Name    : [RemoveRocks]       [1]
+  Continue to : [AddRocks]          *** to be validated ***
+  Redirect to : [AddFish]           *** to be validated ***
+  Item to add : ---
+ Task Name    : [AddFish]           [10]
+  Continue to : [AddCoral]          *** to be validated ***
+  Redirect to : [CatchFish]         *** to be validated ***
+  Item to add : ---
+ Task Name    : [CatchFish]         [1]
+  Continue to : [AddFish]           *** to be validated ***
+  Redirect to : [AddCoral]          *** to be validated ***
+  Item to add : ---
+ Task Name    : [AddCoral]          [5]
+  Continue to : [AddToys]           *** to be validated ***
+  Redirect to : [RemoveCoral]       *** to be validated ***
+  Item to add : ---
+ Task Name    : [RemoveCoral]       [1]
+  Continue to : [AddCoral]          *** to be validated ***
+  Redirect to : [AddToys]           *** to be validated ***
+  Item to add : ---
+ Task Name    : [AddToys]           [4]
+  Item to add : ---
+ Task Name    : [RemoveToys]        [1]
+  Item to add : ---
+
+ Validating the Set of Tasks
+ ---------------------------
+
+ Active Tasks
+ ------------
+ Task Name    : [SetupTank]         [2]
+  Continue to : [AddGravel]
+ Item to add : ---
+ Task Name    : [RemoveTank]        [1]
+  Continue to : [SetupTank]
+  Item to add : ---
+ Task Name    : [AddGravel]         [5]
+  Continue to : [AssembleFilter]
+  Redirect to : [RemoveGravel]
+  Item to add : ---
+ Task Name    : [RemoveGravel]      [1]
+  Continue to : [AddGravel]
+  Item to add : ---
+ Task Name    : [AssembleFilter]    [5]
+  Continue to : [InstallLighting]
+  Redirect to : [DisassembleFilter]
+  Item to add : ---
+ Task Name    : [DisassembleFilter] [1]
+  Continue to : [AssembleFilter]
+  Item to add : ---
+ Task Name    : [InstallLighting]   [2]
+  Continue to : [AddHeater]
+  Redirect to : [ReplaceLighting]
+  Item to add : ---
+ Task Name    : [ReplaceLighting]   [1]
+  Continue to : [InstallLighting]
+ Item to add : ---
+ Task Name    : [AddHeater]         [5]
+  Continue to : [AddWater]
+  Redirect to : [RemoveHeater]
+  Item to add : ---
+ Task Name    : [RemoveHeater]      [1]
+ Continue to : [AddHeater]
+  Item to add : ---
+ Task Name    : [AddWater]          [5]
+  Continue to : [AddRocks]
+  Redirect to : [DrainWater]
+  Item to add : ---
+ Task Name    : [DrainWater]        [1]
+  Continue to : [AddWater]
+  Item to add : ---
+ Task Name    : [AddRocks]          [8]
+  Continue to : [AddFish]
+  Redirect to : [RemoveRocks]
+  Item to add : ---
+ Task Name    : [RemoveRocks]       [1]
+  Continue to : [AddRocks]
+ Redirect to : [AddFish]
+  Item to add : ---
+ Task Name    : [AddFish]           [10]
+  Continue to : [AddCoral]
+  Redirect to : [CatchFish]
+  Item to add : ---
+ Task Name    : [CatchFish]         [1]
+  Continue to : [AddFish]
+  Redirect to : [AddCoral]
+  Item to add : ---
+ Task Name    : [AddCoral]          [5]
+  Continue to : [AddToys]
+  Redirect to : [RemoveCoral]
+  Item to add : ---
+ Task Name    : [RemoveCoral]       [1]
+  Continue to : [AddCoral]
+  Redirect to : [AddToys]
+  Item to add : ---
+ Task Name    : [AddToys]           [4]
+  Item to add : ---
+ Task Name    : [RemoveToys]        [1]
+  Item to add : ---
+
+ *** Load and Accept the Customer Orders ***
+
+ Accepted Customer Orders
+ ------------------------
+ Chloe Coleshill   : Gold Fish Tank
+  - [00000] Tank
+  - [00000] Gravel
+  - [00000] Water
+  - [00000] Fish
+ Elliott Coleshill : Tropical Tank
+  - [00000] Tank
+  - [00000] Gravel
+  - [00000] Water
+  - [00000] Heater
+  - [00000] Fish
+  - [00000] Toys
+ Elliott Coleshill : Marine Tank
+  - [00000] Tank
+  - [00000] Gravel
+  - [00000] Water
+  - [00000] Lighting
+  - [00000] Heater
+  - [00000] Rocks
+  - [00000] Fish
+  - [00000] Coral
+
+ *** Load and accept the Stock Items ***
+
+ Stock Items
+ -----------
+ Tank     [00100] From SetupTank To RemoveTank
+                : Glass Tank to use
+ Gravel   [00200] From AddGravel To RemoveGravel
+                : Gravel for the bottom of the tank
+ Filter   [00300] From AssembleFilter To DisassembleFilter
+                : Cleaning filtration system
+ Lighting [00400] From InstallLighting To ReplaceLighting
+                : Hood lighting system
+ Heater   [00500] From AddHeater To RemoveHeater
+                : Heater for maintaining water temperature
+ Water    [00600] From AddWater To DrainWater
+                : Clean water for the tank
+ Rocks    [00700] From AddRocks To RemoveRocks
+                : Live Reef Rocks
+ Fish     [00800] From AddFish  To CatchFish
+                : Live fish to enjoy
+ Coral    [00900] From AddCoral To RemoveCoral
+                : Live coral to enjoy
+ Toys     [01000] From AddToys  To RemoveToys
+                : Artificial rocks and tank nicknacks
+
+ Status of Each Processor
+ ------------------------
+ Task Name    : [SetupTank]         [2]
+  Continue to : [AddGravel]
+  Item to add : Tank     [00100]
+ Task Name    : [RemoveTank]        [1]
+  Continue to : [SetupTank]
+  Item to add : ---
+ Task Name    : [AddGravel]         [5]
+  Continue to : [AssembleFilter]
+  Redirect to : [RemoveGravel]
+  Item to add : Gravel   [00200]
+ Task Name    : [RemoveGravel]      [1]
+  Continue to : [AddGravel]
+  Item to add : ---
+ Task Name    : [AssembleFilter]    [5]
+  Continue to : [InstallLighting]
+  Redirect to : [DisassembleFilter]
+  Item to add : Filter   [00300]
+ Task Name    : [DisassembleFilter] [1]
+  Continue to : [AssembleFilter]
+  Item to add : ---
+ Task Name    : [InstallLighting]   [2]
+  Continue to : [AddHeater]
+  Redirect to : [ReplaceLighting]
+  Item to add : Lighting [00400]
+ Task Name    : [ReplaceLighting]   [1]
+  Continue to : [InstallLighting]
+  Item to add : ---
+ Task Name    : [AddHeater]         [5]
+  Continue to : [AddWater]
+  Redirect to : [RemoveHeater]
+  Item to add : Heater   [00500]
+ Task Name    : [RemoveHeater]      [1]
+  Continue to : [AddHeater]
+  Item to add : ---
+ Task Name    : [AddWater]          [5]
+  Continue to : [AddRocks]
+  Redirect to : [DrainWater]
+  Item to add : Water    [00600]
+ Task Name    : [DrainWater]        [1]
+  Continue to : [AddWater]
+  Item to add : ---
+ Task Name    : [AddRocks]          [8]
+  Continue to : [AddFish]
+  Redirect to : [RemoveRocks]
+  Item to add : Rocks    [00700]
+ Task Name    : [RemoveRocks]       [1]
+  Continue to : [AddRocks]
+  Redirect to : [AddFish]
+  Item to add : ---
+ Task Name    : [AddFish]           [10]
+  Continue to : [AddCoral]
+  Redirect to : [CatchFish]
+  Item to add : Fish     [00800]
+ Task Name    : [CatchFish]         [1]
+  Continue to : [AddFish]
+  Redirect to : [AddCoral]
+  Item to add : ---
+ Task Name    : [AddCoral]          [5]
+  Continue to : [AddToys]
+  Redirect to : [RemoveCoral]
+  Item to add : Coral    [00900]
+ Task Name    : [RemoveCoral]       [1]
+  Continue to : [AddCoral]
+  Redirect to : [AddToys]
+  Item to add : ---
+ Task Name    : [AddToys]           [4]
+  Item to add : Toys     [01000]
+ Task Name    : [RemoveToys]        [1]
+  Item to add : ---
+
+ Completed Customer Orders
+ -------------------------
+ Elliott Coleshill : Marine Tank
+  + [00100] Tank
+  + [00200] Gravel
+  + [00600] Water
+  + [00400] Lighting
+  + [00500] Heater
+  + [00700] Rocks
+  + [00801] Fish
+  + [00900] Coral
+ Elliott Coleshill : Tropical Tank
+  + [00101] Tank
+  + [00201] Gravel
+  + [00601] Water
+  + [00501] Heater
+  + [00800] Fish
+  + [01000] Toys
+ Chloe Coleshill   : Gold Fish Tank
+  + [00102] Tank
+  + [00202] Gravel
+  + [00602] Water
+  + [00802] Fish
+
+ Available Items
+ ---------------
+ Tank     [00103]
+ Gravel   [00203]
+ Filter   [00300]
+ Lighting [00401]
+ Heater   [00502]
+ Water    [00603]
+ Rocks    [00701]
+ Fish     [00803]
+ Coral    [00901]
+ Toys     [01001]
+
+ Done!
+ Press Enter Key to Exit ...

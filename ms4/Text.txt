@@ -1,0 +1,12 @@
+Command Line Arguments
+----------------------
+Task File Specified           = Tasks.dat
+Customer Order File Specified = CustomerOrders.dat
+Item File Specified           = Items.dat
+Entry Task                    = SetupTank
+Pause After n steps         n = 500
+File Record Field Delimiter   = ,
+Log File                      = FTLine.log
+
+
+Done!

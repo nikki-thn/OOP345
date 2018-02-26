@@ -1,1 +1,1 @@
-
+https://mikeongis.wordpress.com/2011/11/10/inserting-object-to-c11-vector-without-copy-constructor/
