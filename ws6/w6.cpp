@@ -20,7 +20,6 @@ int main(int argc, char* argv[]) {
 		Grades grades(argv[1]);
 
 		// define the lambda expression for letter
-
 		grades.displayGrades(std::cout, [](double i) {
 			if (i <= 100 && i >= 90) std::cout << "A+" << std::endl;
 			if (i < 90 && i >= 80) std::cout << "A" << std::endl;
