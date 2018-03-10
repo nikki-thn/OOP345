@@ -1,19 +1,4 @@
 /*! *********************************************************
-* OOP345 Workshop 2: Copy and Move Semantic
-* File: Text.h
-* Version: 1.0
-* \date Feb 4, 2018
-* \author Nikki Truong - 112 314 174
-* Description
-* This program will implement the copy and move semantics to manage a class with a resource
-***********************************************************/
-
-
-#ifndef W5_NOTIFICATIONS_H
-#define W5_NOTIFICATIONS_H
-
-#include <iostream>
-/*! *********************************************************
 * OOP345 Workshop 4: Containers
 * File: Notifications.h
 * Version: 1.0
@@ -25,6 +10,9 @@
 * owns those copies and destroys them once they are no longer needed.
 ***********************************************************/
 
+#ifndef W5_NOTIFICATIONS_H
+#define W5_NOTIFICATIONS_H
+#include <iostream>
 #include "Message.h"
 
 #define MAX_SIZE 10
