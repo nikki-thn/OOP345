@@ -1,13 +1,24 @@
+/*! *********************************************************
+* OOP345 Milestone 1: Tasks
+* File: Tasks.cpp
+* \date March 15, 2018
+* \author Nikki Truong - 112 314 174
+***********************************************************/
+
 #include<iostream>
 #include <iomanip>
 #include <vector>
 #include "Task.h"
 
 size_t Task::field_width = 0;
+const int MAX_TOKEN = 4;
 
-//contain a single record
+/*! One parameter Constructor: The constructor takes in a single record with
+components to be processed
+*/
 Task::Task(const std::string& record_) {
 
+	//Initializing data members to safety state
 	name = "";
 	slots = "1";
 	nextTask[passed] = "";
@@ -15,17 +26,22 @@ Task::Task(const std::string& record_) {
 	pNextTask[passed] = nullptr;
 	pNextTask[redirect] = nullptr;
 
+	//Use Utilities class to seperate the components
 	Utilities exactToken;
+	
+	//Placeholder and flag variables to be used during extraction
 	std::string temp;
 	size_t pos = 0;
 	bool more = true;
-	std::vector<std::string> tokens(4); //stores all available tokens
+	std::vector<std::string> tokens(MAX_TOKEN); //stores all available tokens
 
+	//assign tokens to temp vector for validation
 	for (size_t i = 0; i < 4 && more; i++) {
 		temp = exactToken.nextToken(record_, pos, more);
 		if (temp != "") tokens[i] = temp;	
 	}
 
+	//Trim white space from each components
 	for (auto& i : tokens) {
 		size_t first = i.find_first_not_of(' ');
 		i.erase(0, first);
@@ -41,13 +57,16 @@ Task::Task(const std::string& record_) {
 			field_width = exactToken.getFieldWidth();
 		}
 	}
+	//throw exception if fields missing
 	else throw std::string(record_) + std::string("*** no token found before the delimiter ***");
 
+	//assign each component to data member
 	if (tokens[1] != "") slots = tokens[1];
 	if (tokens[2] != "") nextTask[passed] = tokens[2];
 	if (tokens[3] != "") nextTask[redirect] = tokens[3];
 }
 
+/*! Validate a Task and returns true if it is valid*/
 bool Task::validate(const Task& task) {
 
 	bool isValid = false;
@@ -63,14 +82,16 @@ bool Task::validate(const Task& task) {
 		isValid = true;
 	}
 	
+	//\return true is a Task is valid
 	return isValid;
 }
 
+/*! Functions return the pointer to the next task based on the parameter */
 const Task* Task::getNextTask(Quality quantity) const {
 	int index = -1;
 
 	if (quantity == passed) index = passed;
-	else if (quantity == redirect) index = 1;
+	else if (quantity == redirect) index = redirect;
 
 	if (pNextTask[passed] == nullptr) {
 
@@ -81,6 +102,7 @@ const Task* Task::getNextTask(Quality quantity) const {
 	return pNextTask[index];
 }
 
+/*! Function display each task in a specified format */
 void Task::display(std::ostream& os) const {
 	os.setf(std::ios::left);
 
@@ -95,10 +117,10 @@ void Task::display(std::ostream& os) const {
 	else {
 
 		if (nextTask[passed] == "") {
-			os << "Task Name      :  "  << std::setw(field_width + 3) << "[" + name + "]" << "[" << slots << "]" << std::endl;
+			os << "Task Name      :  " << std::setw(field_width + 3) << "[" + name + "]" << "[" << slots << "]" << std::endl;
 		}
 		else {
-			os << "Task Name      :  " << std::setw(field_width + 3) << "[" + name + "]" << "[" << slots + "]"<< std::endl;
+			os << "Task Name      :  " << std::setw(field_width + 3) << "[" + name + "]" << "[" << slots + "]" << std::endl;
 			os << "  Continue to  :  " << std::setw(field_width + 3) << "[" + nextTask[passed] + "]" << "*** to be validated ***" << std::endl;
 
 			if (nextTask[redirect] != "") {
@@ -109,8 +131,8 @@ void Task::display(std::ostream& os) const {
 		os.setf(std::ios::left);
 	}
 
-}
 
+}
 
 
 
