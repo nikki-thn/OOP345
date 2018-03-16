@@ -31,9 +31,6 @@ const std::string Utilities::nextToken(const std::string& str, size_t& next_pos,
 	return token;
 }
 
-
-
 void Utilities::setLogFile(const char* logfile) {
 	std::ofstream file(logfile, std::ios::trunc);
-
 }

@@ -20,12 +20,15 @@ Item::Item(const std::string& record_) {
 
 	for (size_t i = 0; i < numToken && more; i++) {
 		temp = exactToken.nextToken(record_, pos, more);
-		if (field_width < temp.length()) field_width = temp.length();
-		if (!temp.empty()) tokens[i] = temp;
 		
+		if (!temp.empty()) tokens[i] = temp;	
 	}
 
-	if (!tokens[0].empty()) name = tokens[0];
+	if (!tokens[0].empty()) {
+		if (field_width < tokens[0].length()) field_width = tokens[0].length();
+		name = tokens[0];
+	}
+
 	else throw std::string(record_ + "<-- *** no token found before the delimiter ***");
 
 	if (!tokens[1].empty()) filler = tokens[1];
