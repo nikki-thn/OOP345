@@ -26,9 +26,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ms2">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="TaskList.dat">
       <Filter>Source Files</Filter>
     </None>

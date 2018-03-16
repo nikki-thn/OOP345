@@ -24,7 +24,6 @@
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ms2" />
     <None Include="TaskList.dat" />
   </ItemGroup>
   <ItemGroup>
