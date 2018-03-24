@@ -15,22 +15,24 @@ class Utilities {
 
 public:
 
-	//constructor
-	Utilities() : field_width(1) {}
+	// default constructor
+	Utilities();
 
-	// resets the field width of the current object to fw
-	void setFieldWidth(size_t fw) { field_width = fw; }
+	// resets the field width of the current object to parameter value
+	void setFieldWidth(size_t fw);
 
 	//return field_width of the current object
-	size_t getFieldWidth() const { return field_width;  }
+	size_t getFieldWidth() const;
 
 	//set delimiter to the new value
-	static void setDelimiter(const char delimiter_) { Utilities::delimiter = delimiter_; }
+	static void setDelimiter(const char delimiter_);
 
-	//return logFile static member
-	static std::ofstream& getLogFile() { return logFile;  }
+	/*! \return a modifiable reference to the log file */
+	static std::ofstream& getLogFile() { return logFile; }
 
+	//return the next token
 	const std::string nextToken(const std::string&, size_t&, bool&);
 
+	// set log file
 	static void setLogFile(const char*);
 };

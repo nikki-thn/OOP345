@@ -28,24 +28,18 @@ Item::Item(const std::string& record_) {
 		if (field_width < tokens[0].length()) field_width = tokens[0].length();
 		name = tokens[0];
 	}
-
-	else throw std::string(record_ + "<-- *** no token found before the delimiter ***");
+	else throw record_ + std::string("<-- *** no token found before the delimiter ***");
 
 	if (!tokens[1].empty()) filler = tokens[1];
 	if (!tokens[2].empty()) remover = tokens[2];
 	if (!tokens[3].empty()) code = atoi(tokens[3].c_str());
 	if (!tokens[4].empty()) description = tokens[4];
-
-
-	//if (field_width < tokens[4].length()) field_width = tokens[4].length();
-
 }
 
 Item& Item::operator++(int value){ 
-	code += value; 
+	++code; 
 	return *this;
 }
-
 
 void Item::display(std::ostream& os, bool full) const {
 
