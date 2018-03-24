@@ -1,5 +1,6 @@
 #ifndef w7_SALE_H
-#define W7_SALE_H
+#define w7_SALE_H
+
 #include <iostream>
 #include <vector>
 #include "iProduct.h"

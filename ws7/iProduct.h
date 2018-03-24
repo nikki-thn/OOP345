@@ -1,5 +1,5 @@
-#ifndef _I_PRODUCT_H_
-#define _I_PRODUCT_H_
+#ifndef w7_I_PRODUCT_H_
+#define w7_I_PRODUCT_H_
 
 // Workshop 7 - STL Containers
 // iProduct.h

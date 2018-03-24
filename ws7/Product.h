@@ -1,5 +1,5 @@
 #ifndef w7_PRODUCT_H
-#define W7_PRODUCT_H
+#define w7_PRODUCT_H
 
 #include "iProduct.h"
 
@@ -25,6 +25,7 @@ namespace w7 {
 		char m_taxRate;
 
 	public:
+
 		TaxableProduct(int id, double price, const char tax) : Product(id, price), m_taxRate(tax) {}
 		
 		double getCharge() const;
