@@ -20,15 +20,28 @@ class Item {
 
 public:
 
+	// One argument constructor
 	Item(const std::string& = std::string());
 
+	// Display an item to ostream
 	void display(std::ostream&, bool = false) const;
 
+	// Increment and item code by one
 	Item& operator++(int);
+	
+	/*! \return true if name is empty */
 	bool empty() const { return name.empty(); }
+	
+	/*! \return code member */
 	unsigned int getCode() const { return code; }
+	
+	/*! \return name member */
 	const std::string& getName() const { return name; }
+	
+	/*! \return filler member */
 	const std::string& getFiller() const { return filler; }
+	
+	/*! \retturn remover member */ 
 	const std::string& getRemover() const { return remover; }
 	
 };
