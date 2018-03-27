@@ -25,19 +25,39 @@ class CustomerOrder {
 
 public:
 
+	//One argument Constructor
 	CustomerOrder(const std::string&);
+	
+	/*! Restrict Copy Constructor */
 	CustomerOrder(const CustomerOrder&) = delete;
-
+	
+	/*! Restrict Copy Assignment */
 	CustomerOrder& operator=(const CustomerOrder&) = delete;
+	
+	// Move constructor
 	CustomerOrder(CustomerOrder&&) NOEXCEPT;
+	
+	// Move Assignment
 	CustomerOrder&& operator=(CustomerOrder&&) NOEXCEPT;
+	
+	// Destructor
 	~CustomerOrder();
 
+	// Overload operator []
 	const std::string& operator[](unsigned int) const;
+	
+	// Function will fill an item in the customer order
 	void fill(Item&);
+	
+	// Function will remove an item from a customer order
 	void remove(Item&);
+	
+	//Function will display a customer order to ostream
 	void display(std::ostream&) const;
 
-	unsigned int noOrders() const { return nOrders; }
-	bool empty() const { return name.empty(); }
+	// return nOrders
+	unsigned int noOrders() const;
+	
+	//return true if name is empty
+	bool empty() const;
 };
