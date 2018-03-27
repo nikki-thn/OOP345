@@ -30,14 +30,11 @@ public:
 	// function display an item to ostream
 	void display(std::ostream&) const;
 
-	// return true if name is not empty 
+	// return boolean if an item is in the customer order
 	bool asksFor(const Item& i) const;
 
 	// return filled status
 	bool isFilled() const;
-
-	// \return code from Item 
-	void setCode(int c);
 
 	// return name 
 	const std::string& getName() const;
