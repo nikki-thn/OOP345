@@ -1,12 +1,11 @@
 #include "CustomerItem.h"
 
 
-class Item;
-
-/*! One parameter constructor that takes in name of the task*/
+/*! One argument constructor which takes in the name
+* of the customer and assigned it to name member
+* @param the name of the customer*/
 CustomerItem::CustomerItem(const std::string& name_) {
 	
-	//set name to parameter value
 	if (!name_.empty()) name = name_;	
 	
 	//initializing
@@ -15,18 +14,13 @@ CustomerItem::CustomerItem(const std::string& name_) {
 }
 
 
-/*! \return true if name is not empty */
-bool CustomerItem::asksFor(const Item& i) const {
-	return name == i.getName();
-}
+/*! function will check if an item is in a customer order
+* \return true if an item name matched the name of customer item */
+bool CustomerItem::asksFor(const Item& i) const { return name == i.getName(); }
 
 
-/*! \return filled status*/
+/*! \return filled */
 bool CustomerItem::isFilled() const { return filled; }
-
-
-/*! \return code from Item */
-void CustomerItem::setCode(int c) { code = c; }
 
 
 /*! \return name */
@@ -46,7 +40,7 @@ void CustomerItem::clear() {
 	filled = false;
 }
 
-/*! function display an item to ostream*/
+/*! function display an item to ostream */
 void CustomerItem::display(std::ostream& os) const {
 	
 	if (filled == true) os << " + "; //print + if item is filled
