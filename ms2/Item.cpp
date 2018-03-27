@@ -7,8 +7,10 @@
 size_t Item::field_width = 0;
 const size_t numToken = 5;
 
+/*! One argument Constructor */
 Item::Item(const std::string& record_) {
 
+	//Set code to 1 and description to specified value
 	code = 1;
 	description = "no detailed description";
 
@@ -18,12 +20,12 @@ Item::Item(const std::string& record_) {
 	bool more = true;
 	std::vector<std::string> tokens(numToken); //stores all available tokens
 
-	for (size_t i = 0; i < numToken && more; i++) {
-		temp = exactToken.nextToken(record_, pos, more);
-		
+	// Use Utilities to exact string into components
+	for (size_t i = 0; i < numToken && more; i++) {		
+		temp = exactToken.nextToken(record_, pos, more);		
 		if (!temp.empty()) tokens[i] = temp;	
 	}
-
+	
 	if (!tokens[0].empty()) {
 		if (field_width < tokens[0].length()) field_width = tokens[0].length();
 		name = tokens[0];
@@ -36,14 +38,14 @@ Item::Item(const std::string& record_) {
 	if (!tokens[4].empty()) description = tokens[4];
 }
 
+/*! Increment code member by one */
 Item& Item::operator++(int value){ 
 	++code; 
 	return *this;
 }
 
+/*! Function will display an item to ostream */
 void Item::display(std::ostream& os, bool full) const {
-
-	//*** Width length wrong, ask!!!
 
 	os << std::setfill(' ');
 	os << std::left << std::setw(field_width) << name;
