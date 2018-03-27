@@ -18,19 +18,19 @@ class CustomerItem {
 
 public:
 
-	//Constructor
+	//One argument constructor
 	CustomerItem(const std::string& = std::string());
-
-	// function set code to paramater value and filled status to true 
+	
+	//fill item with the parameter
 	void fill(const unsigned int);
-
-	// function set code to 0 and filled status to false 
+	
+	//clear item code
 	void clear();
-
-	// function display an item to ostream
+	
+	//display to ostream
 	void display(std::ostream&) const;
-
-	// return boolean if an item is in the customer order
+	
+	//return boolean if an item is in the customer order
 	bool asksFor(const Item& i) const;
 
 	// return filled status
