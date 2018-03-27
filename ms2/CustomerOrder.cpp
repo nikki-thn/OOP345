@@ -46,13 +46,13 @@ CustomerOrder::CustomerOrder(const std::string& record_) {
 				if (field_width < tokens[0].length()) field_width = tokens[0].length();
 			}
 			//throw exception if first component is missing
-			else throw record + std::string("<-- *** no token found before the delimiter ***");
+			else throw std::string(record_ + "<-- *** no token found before the delimiter ***");
 
 			if (!tokens[1].empty()) product = tokens[1];
 			//throw exception if second component is missing
 			else {
 				std::cout << record << std::endl;
-				throw std::string("<-- *** no token found before the delimiter ***");
+				throw std::string(record_ + "<-- *** no token found before the delimiter ***");
 			}
 
 			order = new CustomerItem[nOrders];
@@ -62,7 +62,7 @@ CustomerOrder::CustomerOrder(const std::string& record_) {
 			}
 		}
 		//throw exception if record is less then 3 components (invalid rec)
-		else throw record_ + std::string("<-- *** no token found before the delimiter ***");
+		else throw std::string(record_ + "<-- *** no token found before the delimiter ***");
 	}
 }
 
@@ -127,7 +127,7 @@ const std::string& CustomerOrder::operator[](unsigned int index_) const
 	return order[index].getName();
 }
 
-/*! function check an item from the customer if it is filled*/
+/*! function check an item from the customer if it is filled */
 void CustomerOrder::fill(Item& item_) {
 
 	for (size_t i = 0; i < nOrders; i++) {
@@ -140,9 +140,8 @@ void CustomerOrder::fill(Item& item_) {
 	}
 }
 
-/*! remove an item from a customer order*/
-void CustomerOrder::remove(Item& item)
-{
+/*! remove an item from a customer order */
+void CustomerOrder::remove(Item& item) {
 	for (size_t i = 0; i < nOrders; i++) {
 		if (order[i].getName() == item.getName()) {
 			nOrders--;
@@ -162,3 +161,9 @@ void CustomerOrder::display(std::ostream& os) const {
 	for (unsigned int i = 0; i < nOrders; i++)
 		order[i].display(os);
 }
+
+/*! \return nOrders */
+unsigned int noOrders() const { return nOrders; }
+	
+/*! \return true if name is empty */
+bool empty() const { return name.empty(); }
