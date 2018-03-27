@@ -162,8 +162,3 @@ void CustomerOrder::display(std::ostream& os) const {
 		order[i].display(os);
 }
 
-/*! \return nOrders */
-unsigned int noOrders() const { return nOrders; }
-	
-/*! \return true if name is empty */
-bool empty() const { return name.empty(); }
