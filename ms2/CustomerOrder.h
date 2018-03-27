@@ -55,9 +55,9 @@ public:
 	//Function will display a customer order to ostream
 	void display(std::ostream&) const;
 
-	// return nOrders
-	unsigned int noOrders() const;
+/*! \return nOrders */
+unsigned int noOrders() const { return nOrders; }
 	
-	//return true if name is empty
-	bool empty() const;
+/*! \return true if name is empty */
+bool empty() const { return name.empty(); }
 };
