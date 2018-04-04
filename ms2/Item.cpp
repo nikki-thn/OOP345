@@ -33,7 +33,7 @@ Item::Item(const std::string& record_) {
 	}
 	else { 
 		std::cout << record_ << std::endl;
-		throw  "<-- *** no token found before the delimiter ***";
+		throw std::string("<-- *** no token found before the delimiter ***");
 		
 	     }
 
