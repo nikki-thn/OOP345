@@ -32,8 +32,8 @@ Item::Item(const std::string& record_) {
 		name = tokens[0];
 	}
 	else { 
-		std::cout << record_ ;
-		throw std::string(record_ + "<-- *** no token found before the delimiter ***");
+		//std::cout << record_ ;
+		throw record_ + "<-- *** no token found before the delimiter ***";
 		
 	     }
 
