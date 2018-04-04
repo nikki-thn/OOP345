@@ -10,6 +10,7 @@ const size_t numToken = 5;
 /*! One argument Constructor */
 Item::Item(const std::string& record_) {
 
+	std::cout << record_ << std::endl;
 	//Set code to 1 and description to specified value
 	code = 1;
 	description = "no detailed description";
