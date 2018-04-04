@@ -10,7 +10,7 @@ const size_t numToken = 5;
 /*! One argument Constructor */
 Item::Item(const std::string& record_) {
 
-	std::cout << record_ << std::endl;
+	//std::cout << record_ << std::endl;
 	//Set code to 1 and description to specified value
 	code = 1;
 	description = "no detailed description";
@@ -31,7 +31,7 @@ Item::Item(const std::string& record_) {
 		if (field_width < tokens[0].length()) field_width = tokens[0].length();
 		name = tokens[0];
 	}
-	else throw record_ + "<-- *** no token found before the delimiter ***";
+	else throw std::string (record_ + "<-- *** no token found before the delimiter ***");
 
 	if (!tokens[1].empty()) filler = tokens[1];
 	if (!tokens[2].empty()) remover = tokens[2];
