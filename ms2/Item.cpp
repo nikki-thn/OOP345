@@ -31,7 +31,11 @@ Item::Item(const std::string& record_) {
 		if (field_width < tokens[0].length()) field_width = tokens[0].length();
 		name = tokens[0];
 	}
-	else throw (record_ + "<-- *** no token found before the delimiter ***");
+	else { 
+		std::cout << record_ << std::endl;
+		throw  "<-- *** no token found before the delimiter ***";
+		
+	     }
 
 	if (!tokens[1].empty()) filler = tokens[1];
 	if (!tokens[2].empty()) remover = tokens[2];
