@@ -4,6 +4,8 @@
 // Chris Szalwinski
 // v1.0 - 24/10/2015
 // v2.0 - 23/02/2016
+
+
 #include <iostream>
 #include "Utilities.h"
 #include "stdlib.h"
@@ -32,9 +34,9 @@ public:
 	//return name of current object
 	const std::string& getName() const { return name; }
 
-	bool validate(const Task&);
-	const Task* getNextTask(Quality) const;
-	void display(std::ostream&) const;
+	bool validate(const Task&); // to validate a task and return true if it's valid
+	const Task* getNextTask(Quality) const; //return the next task
+	void display(std::ostream&) const; //display to ostream 
 };
 
 //retruns true if task a and b has same name

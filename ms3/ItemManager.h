@@ -12,6 +12,6 @@ class ItemManager : public std::vector<Item> {
 
 public:
 
-	//Insert each item in the vector to ostream
+	// Insert each item in the vector to ostream 
 	void display(std::ostream& os, bool insertDescription = false) const;
 };

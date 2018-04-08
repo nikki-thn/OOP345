@@ -13,7 +13,7 @@ class ItemManager;
 class TaskManager : public std::vector<Task> {
 
 public:
-	void validate(std::ostream&);
-	void validate(const ItemManager&, std::ostream&);
-	void display(std::ostream&) const;
+	void validate(std::ostream&); //validate each task against other tasks
+	void validate(const ItemManager&, std::ostream&); //validate task against task in ItemManager
+	void display(std::ostream&) const; //display each Task to ostream 
 };

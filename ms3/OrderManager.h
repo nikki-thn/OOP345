@@ -11,8 +11,10 @@ class ItemManager;
 class CustomerOrder;
 
 class OrderManager : public std::vector<CustomerOrder> {
+
 public:
-	CustomerOrder&& extract();
-	void validate(const ItemManager&, std::ostream&);
-	void display(std::ostream&) const;
+
+	CustomerOrder&& extract(); //return lravlue of CustomerOrder in the vector
+	void validate(const ItemManager&, std::ostream&); //to validate an item is available for an order
+	void display(std::ostream&) const; //display all customerOrder in vector to ostream
 };
