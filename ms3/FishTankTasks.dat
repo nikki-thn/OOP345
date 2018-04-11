@@ -1,4 +1,4 @@
-﻿SetupTank, 2, AddGravel
+SetupTank, 2, AddGravel
 RemoveTank, 1, SetupTank
 AddGravel, 5, AssembleFilter, RemoveGravel
 RemoveGravel, 1, AddGravel
