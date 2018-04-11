@@ -6,6 +6,7 @@
 // v2.0 - 23/02/2016
 #include <iostream>
 #include <string>
+
 #ifndef _MSC_VER
 #define NOEXCEPT noexcept
 #else
