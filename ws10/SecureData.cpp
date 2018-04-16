@@ -61,19 +61,30 @@ namespace w10 {
 			throw std::string("\n***No data stored***\n");
 	}
 
-	void SecureData::code(char key) {
+		void SecureData::code(char key) {
 
-		//thread t1(bind(converter, text, key, nbytes / 2, Cryptor()));
-		//thread t2(bind(converter, text + nbytes / 2, key, nbytes - (nbytes / 2), Cryptor()));
+		//// define the promises
+		//std::promise<int> promise1;
+		//std::promise<int> promise2;
 
-		//t1.join();
-		//t2.join();
+		//// get the futures
+		//std::future<int> promiseResult1 = promise1.get_future();
+		//std::future<int> promiseResult2 = promise2.get_future();
 
+		//void converter(char* t, char key, int n, const Cryptor& c)
+		//converter(text, key, nbytes, Cryptor());
 
+		std::thread t1(converter, text, key, nbytes / 2, Cryptor());
+		std::thread t2(converter, text + nbytes / 2, key, nbytes - (nbytes / 2), Cryptor());
+		
+		//get the result from futures
+	//	promiseResult1.get();
+	//	promiseResult2.get();
 
-		converter(text, key, nbytes, Cryptor());
-		encoded = !encoded;
-	}
+		//join threads
+		t1.join();
+		t2.join();
+
 
 	void SecureData::backup(const char* file) {
 		if (!text)
