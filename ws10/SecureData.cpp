@@ -101,7 +101,7 @@ namespace w10 {
 				f.close();
 			}
 		}
-	}
+	
 
 	void SecureData::restore(const char* file, char key) {
 		// open binary file
