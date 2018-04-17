@@ -116,7 +116,7 @@ namespace w10 {
 
 		//TODO:
 		// open binary file
-		std::fstream input(file, std::ios::in | std::ios::binary);
+		std::fstream fs(file, std::ios::in | std::ios::binary);
 		if (fs.fail()) throw "fail to open file" + std::string(file);
 
 		// write binary file here
