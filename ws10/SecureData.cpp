@@ -61,7 +61,7 @@ namespace w10 {
 			throw std::string("\n***No data stored***\n");
 	}
 
-		void SecureData::code(char key) {
+	void SecureData::code(char key) {
 
 		//// define the promises
 		//std::promise<int> promise1;
@@ -84,7 +84,7 @@ namespace w10 {
 		//join threads
 		t1.join();
 		t2.join();
-
+	}
 
 	void SecureData::backup(const char* file) {
 		if (!text)
@@ -101,7 +101,7 @@ namespace w10 {
 				f.close();
 			}
 		}
-	
+	}
 
 	void SecureData::restore(const char* file, char key) {
 		// open binary file
