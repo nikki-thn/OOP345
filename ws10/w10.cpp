@@ -19,10 +19,10 @@ int main(int argc, char** argv) {
 
 	try {
 		w10::SecureData sd(argv[1], key);
-		//sd.backup(argv[2]);
+		sd.backup(argv[2]);
 
-		//sd.restore(argv[2], key);
-		//std::cout << sd << std::endl;
+		sd.restore(argv[2], key);
+		std::cout << sd << std::endl;
 
 	}
 	catch (const std::string& msg) {
