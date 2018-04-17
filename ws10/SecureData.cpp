@@ -144,7 +144,7 @@ namespace w10 {
 		while (input.good())
 			input >> text[i++];
 		text[--i] = '\0';
-*?
+*/
 
 		fs.close(); //close file
 
