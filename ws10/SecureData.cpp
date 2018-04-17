@@ -39,6 +39,7 @@ namespace w10 {
 		while (input.good())
 			input >> text[i++];
 		text[--i] = '\0';
+
 		std::cout << "\n" << nbytes << " bytes copied from text "
 			<< file << " into memory (null byte added)\n";
 		encoded = false;
@@ -62,6 +63,7 @@ namespace w10 {
 	}
 
 	void SecureData::code(char key) {
+		//converter(text, key, nbytes, Cryptor());
 
 		//// define the promises
 		//std::promise<int> promise1;
@@ -73,53 +75,78 @@ namespace w10 {
 
 		//void converter(char* t, char key, int n, const Cryptor& c)
 		//converter(text, key, nbytes, Cryptor());
-
+		
 		std::thread t1(converter, text, key, nbytes / 2, Cryptor());
 		std::thread t2(converter, text + nbytes / 2, key, nbytes - (nbytes / 2), Cryptor());
-		
+
 		//get the result from futures
-	//	promiseResult1.get();
-	//	promiseResult2.get();
+		//	promiseResult1.get();
+		//	promiseResult2.get();
 
 		//join threads
 		t1.join();
 		t2.join();
+
+		encoded = !encoded;
 	}
 
 	void SecureData::backup(const char* file) {
+
 		if (!text)
 			throw std::string("\n***No data stored***\n");
 		else if (!encoded)
 			throw std::string("\n***Data is not encoded***\n");
+
 		else {
+
+			//TODO:
 			// open binary file
-			std::fstream f(file, std::ios::out | std::ios::binary | std::ios::trunc);
-			if (f.fail()) throw "fail to open file";
+			std::fstream fs(file, std::ios::out | std::ios::binary);
+			if (fs.fail()) throw "fail to open file";
 			else {
 
-				f.write(text, nbytes);
-				f.close();
+				// write binary file here
+				fs.write(text, nbytes);
+				fs.close();
 			}
 		}
 	}
 
 	void SecureData::restore(const char* file, char key) {
+
+		//TODO:
 		// open binary file
-		std::fstream f(file, std::ios::in | std::ios::binary);
-		if (f.fail()) throw "fail to open file" + std::string(file);
-		// write binary file here
-		else {
+		std::fstream input(file, std::ios::in | std::ios::binary);
+		//if (fs.fail()) throw "fail to open file" + std::string(file);
 
-			f.seekg(0, std::ios::end);
-			nbytes = (int)f.tellg();
-			text = new char[nbytes + 1];
+		//// write binary file here
+		//fs.seekg(0, std::ios::end); //go to the beginning of the file
+		//nbytes = static_cast<int>(fs.tellg()); //go to the last position of the file aka the size
+		//text = new char[nbytes + 1]; //allocate memory
 
-			f.seekg(0, std::ios::beg);
-			f.read(text, nbytes);
-			text[nbytes] = '\0';
+		//fs.seekg(0, std::ios::beg); //rewind to the beginning again and start reading
+		//fs.read(text, nbytes); //read in each character
+		//text[nbytes] = '\0'; //put the null character to end the c-style string
 
-			f.close();
+		nbytes = 0;
+		input >> std::noskipws;
+		while (input.good()) {
+			char c;
+			input >> c;
+			nbytes++;
 		}
+		nbytes--;
+		input.clear();
+		input.seekg(0, std::ios::beg);
+		text = new char[nbytes + 1];
+
+		int i = 0;
+		while (input.good())
+			input >> text[i++];
+		text[--i] = '\0';
+
+
+		//fs.close(); //close file
 
 		std::cout << "\n" << nbytes + 1 << " bytes copied from binary file "
 			<< file << " into memory (null byte included)\n";
@@ -136,3 +163,6 @@ namespace w10 {
 	}
 
 }
+
+
+//http://www.uni-obuda.hu/users/mohosp/2008_9_2/C_Jegyzetek/Header_filek/iostream/istream/tellg.html
