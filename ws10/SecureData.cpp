@@ -76,9 +76,9 @@ namespace w10 {
 		//void converter(char* t, char key, int n, const Cryptor& c)
 		//converter(text, key, nbytes, Cryptor());
 		
-		std::thread t1(converter, text, key, nbytes / 2, Cryptor());
-		std::thread t2(converter, text + nbytes / 2, key, nbytes - (nbytes / 2), Cryptor());
-
+		std::thread t1(std::bind(converter, text, key, nbytes / 2, Cryptor()));
+		std::thread t2(std::bind(converter, text + nbytes / 2, key, nbytes - (nbytes / 2), Cryptor()));
+		
 		//get the result from futures
 		//	promiseResult1.get();
 		//	promiseResult2.get();
