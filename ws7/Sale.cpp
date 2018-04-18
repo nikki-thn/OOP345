@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include <string>
+#include <cstring>
 #include "Sale.h"
 
 namespace w7 {
@@ -12,7 +13,8 @@ namespace w7 {
 
 			//allocate memory for fileName
 			m_fileName = new char[strlen(fileName) + 1];
-			strcpy(m_fileName, fileName);
+			std::strcpy(m_fileName, fileName);
+
 
 			std::ifstream file;
 			file.open(m_fileName, std::ios::in);
