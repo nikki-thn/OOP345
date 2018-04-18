@@ -76,8 +76,8 @@ namespace w10 {
 		//void converter(char* t, char key, int n, const Cryptor& c)
 		//converter(text, key, nbytes, Cryptor());
 		
-		std::thread t1(std::bind(converter, text, key, nbytes / 2, Cryptor()));
-		std::thread t2(std::bind(converter, text + nbytes / 2, key, nbytes - (nbytes / 2), Cryptor()));
+		std::thread t1(std::bind(converter, text, key, nbytes, Cryptor()));
+		std::thread t2(std::bind(converter, text, key, nbytes, Cryptor()));
 
 		//get the result from futures
 		//	promiseResult1.get();
@@ -116,19 +116,19 @@ namespace w10 {
 
 		//TODO:
 		// open binary file
-		std::fstream fs(file, std::ios::in | std::ios::binary);
-		if (fs.fail()) throw "fail to open file" + std::string(file);
+		std::fstream input(file, std::ios::in | std::ios::binary);
+		//if (fs.fail()) throw "fail to open file" + std::string(file);
 
-		// write binary file here
-		fs.seekg(0, std::ios::end); //go to the beginning of the file
-		nbytes = static_cast<int>(fs.tellg()); //go to the last position of the file aka the size
-		text = new char[nbytes + 1]; //allocate memory
+		//// write binary file here
+		//fs.seekg(0, std::ios::end); //go to the beginning of the file
+		//nbytes = static_cast<int>(fs.tellg()); //go to the last position of the file aka the size
+		//text = new char[nbytes + 1]; //allocate memory
 
-		fs.seekg(0, std::ios::beg); //rewind to the beginning again and start reading
-		fs.read(text, nbytes); //read in each character
-		text[nbytes] = '\0'; //put the null character to end the c-style string
+		//fs.seekg(0, std::ios::beg); //rewind to the beginning again and start reading
+		//fs.read(text, nbytes); //read in each character
+		//text[nbytes] = '\0'; //put the null character to end the c-style string
 
-		/*nbytes = 0;
+		nbytes = 0;
 		input >> std::noskipws;
 		while (input.good()) {
 			char c;
@@ -144,9 +144,9 @@ namespace w10 {
 		while (input.good())
 			input >> text[i++];
 		text[--i] = '\0';
-*/
 
-		fs.close(); //close file
+
+		//fs.close(); //close file
 
 		std::cout << "\n" << nbytes + 1 << " bytes copied from binary file "
 			<< file << " into memory (null byte included)\n";
