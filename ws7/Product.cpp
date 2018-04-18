@@ -1,4 +1,7 @@
 #include "Product.h"
+
+const double HST_RATES = 0.13;
+const double GST_RATES = 0.08;
  
 namespace w7 {
 
@@ -17,10 +20,10 @@ namespace w7 {
 		double total;
 
 		if (m_taxRate == 'H') {
-			total = m_price * 1.130000000;
+			total = m_price * (1 + HST_RATES);
 		}
 		else if (m_taxRate == 'P') {
-			total = m_price * 1.080000000;
+			total = m_price * (1 + GST_RATES);
 		}
 		return total;
 	}
