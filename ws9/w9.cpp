@@ -14,6 +14,7 @@ w9::List<w9::Product> merge(const w9::List<w9::Description>& desc,
 	const w9::List<w9::Price>& price) {
 
 	w9::List<w9::Product> priceList;
+
 	for (size_t i = 0; i < desc.size(); i++) {
 
 		for (size_t j = 0; j < price.size(); j++) {
@@ -39,8 +40,6 @@ w9::List<w9::Product> merge(const w9::List<w9::Description>& desc,
 			}
 		}
 	}
-
-
 	return priceList;
 }
 
