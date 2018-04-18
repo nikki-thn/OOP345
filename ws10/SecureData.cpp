@@ -1,3 +1,11 @@
+/*! *********************************************************
+* OOP345 Workshop 9: Multi-threadings
+* File: SecureData.cpp
+* Version: 1.0
+* \date April 12, 2018
+* \author Nikki Truong - 112 314 174
+***********************************************************/
+
 // Workshop 10 - Multi-Threading
 // SecureData.cpp
 
