@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <future>
 #include <string>
 #include <functional>
 #include <thread>
@@ -10,10 +11,12 @@
 
 namespace w10 {
 
-	//void converter(std::promise<int> i, char* t, char key, int n, const Crystor& c){
+	//void converter(std::promise<w10::Cryptor>& p, char* t, char key, int n, const Crystor& c) {
 	void converter(char* t, char key, int n, const Cryptor& c) {
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i < n; i++) {
 			t[i] = c(t[i], key);
+			//p.set_value(t[i]);
+		}
 	}
 
 	SecureData::SecureData(const char* file, char key) {
@@ -76,7 +79,8 @@ namespace w10 {
 
 		//void converter(char* t, char key, int n, const Cryptor& c)
 		//converter(text, key, nbytes, Cryptor());
-		
+
+		//create threads
 		std::thread t1(std::bind(converter, text, key, nbytes, Cryptor()));
 		std::thread t2(std::bind(converter, text, key, nbytes, Cryptor()));
 
@@ -100,7 +104,7 @@ namespace w10 {
 
 		else {
 
-			//TODO:
+			//*** TODO:
 			// open binary file
 			std::fstream fs(file, std::ios::out | std::ios::binary);
 			if (fs.fail()) throw "fail to open file";
@@ -110,15 +114,18 @@ namespace w10 {
 				fs.write(text, nbytes);
 				fs.close();
 			}
+
+			//*** END TODO
 		}
 	}
 
 	void SecureData::restore(const char* file, char key) {
 
-		//TODO:
+		//***TODO:
+
 		// open binary file
 		std::fstream fs(file, std::ios::in | std::ios::binary);
-		//if (fs.fail()) throw "fail to open file" + std::string(file);
+		if (fs.fail()) throw "fail to open file" + std::string(file);
 
 		// write binary file here
 		fs.seekg(0, std::ios::end); //go to the beginning of the file
@@ -131,26 +138,7 @@ namespace w10 {
 
 		fs.close(); //close file
 
-		/*
-		nbytes = 0;
-		input >> std::noskipws;
-		while (input.good()) {
-			char c;
-			input >> c;
-			nbytes++;
-		}
-		nbytes--;
-		input.clear();
-		input.seekg(0, std::ios::beg);
-		text = new char[nbytes + 1];
-
-		int i = 0;
-		while (input.good())
-			input >> text[i++];
-		text[--i] = '\0';
-		*/
-
-
+		//*** END TODO
 
 		std::cout << "\n" << nbytes + 1 << " bytes copied from binary file "
 			<< file << " into memory (null byte included)\n";
