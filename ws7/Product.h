@@ -21,7 +21,7 @@ namespace w7 {
 
 	class TaxableProduct : public Product {
 		
-		double m_taxStatus [2] = { 0.13, 0.08 };
+		double m_taxStatus [2] { 0.13, 0.08 };
 		char m_taxRate;
 
 	public:
