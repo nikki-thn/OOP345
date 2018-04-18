@@ -19,7 +19,6 @@ int main(int argc, char** argv) {
 
 		std::cout << "\nPress any key to continue ... ";
 		std::cin.get();
-
 	}
 	catch (const char* message){
 		std::cout << message << std::endl;

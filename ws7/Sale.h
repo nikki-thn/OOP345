@@ -20,8 +20,6 @@ namespace w7 {
 
 		void display(std::ostream& os) const;
 
-
-
 	};
 }
 
