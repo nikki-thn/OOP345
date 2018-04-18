@@ -1,3 +1,11 @@
+/*! *********************************************************
+* OOP345 Workshop 9: Smart Pointers
+* File: w9.cpp
+* Version: 1.0
+* \date April 12, 2018
+* \author Nikki Truong - 112 314 174
+***********************************************************/
+
 // Workshop 9 - Smart Pointers
 // w9.cpp
 
@@ -20,8 +28,8 @@ w9::List<w9::Product> merge(const w9::List<w9::Description>& desc,
 		for (size_t j = 0; j < price.size(); j++) {
 
 			if (desc[i].code == price[j].code) {
-				//w9::Product* temp;
-
+				
+				//w9::Product* temp = nullptr;
 				//temp = new w9::Product(desc[i].desc, price[j].price);
 
 
