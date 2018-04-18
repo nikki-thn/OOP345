@@ -1,9 +1,12 @@
 #include "Product.h"
 
-const double HST_RATES = 0.13;
-const double GST_RATES = 0.08;
- 
+//const double HST_RATES = 0.13;
+//const double GST_RATES = 0.08;
+
+
 namespace w7 {
+
+	std::array <double, 2> TAX_RATES { 0.13, 0.08 };
 
 	/*! function will display product and price to ostream*/
 	void Product::display(std::ostream& os) const {
@@ -20,10 +23,10 @@ namespace w7 {
 		double total;
 
 		if (m_taxRate == 'H') {
-			total = m_price * (1 + HST_RATES);
+			total = m_price * (1 + TAX_RATES[0]);
 		}
 		else if (m_taxRate == 'P') {
-			total = m_price * (1 + GST_RATES);
+			total = m_price * (1 + TAX_RATES[1]);
 		}
 		return total;
 	}
