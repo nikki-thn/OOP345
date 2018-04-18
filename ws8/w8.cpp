@@ -29,7 +29,6 @@ int main(int argc, char** argv) {
 
 	try {
 		w8::DataTable<float> data(dataFile, FW, ND);
-	
 		if (argc == 3) {
 			std::cout << "\nData Values\n===========\n";
 			std::cout << data << std::endl;
