@@ -1,75 +1,115 @@
+/*! *********************************************************
+* OOP345 Workshop 7: STL Algorithms
+* File: DataTable.h
+* Version: 1.0
+* \date April 12, 2018
+* \author Nikki Truong - 112 314 174
+* Description
+* This workshop using templates, STL containers and STL algorithms
+* to calculate linear regression of two sets of variables
+***********************************************************/
+
 #ifndef W8_DATATABLE_H
 #define W8_DATATABLE_H
 
-#include <iostream>
 #include <fstream>
 #include <algorithm>
 #include <numeric>
 #include <vector>
 #include <exception>
 #include <math.h>
+#include <sstream>
 
 
 namespace w8 {
 
 	template<typename T>
 	class DataTable {
+
 		int m_width;
 		int m_decimal;
 		int m_numRecs;
 		std::vector<T> m_dataX;
 		std::vector<T> m_dataY;
+
 	public:
 
+		/*! Default contructor */
 		DataTable() : m_width(0), m_decimal(0), m_numRecs(0) {}
 
+		/*! Overload constructor */
 		DataTable(std::ifstream& ifs, const int width, const int decimal) {
 
+			// Read data from file
 			if (!ifs.fail() && ifs.is_open()) {
 				T x;
 				T y;
+
 				m_numRecs = 0;
+
+				// Count lines to allocate memory 
 				while (!ifs.eof()) {
-					ifs >> x >> y;
-					m_dataX.push_back(x);
-					m_dataY.push_back(y);
+					std::string temp;
+					getline(ifs, temp, '\n');
 					m_numRecs++;
 				}
+
+				ifs.seekg(0); //rewind
+
+				// Read in 
+				for (int i = 0; i < m_numRecs; i++) {
+					ifs >> x >> y;
+					ifs.ignore();
+					m_dataX.push_back(x);
+					m_dataY.push_back(y);
+				}
+
 				m_width = width;
 				m_decimal = decimal;
 			}
-
+			// if file is not valid, call default constructor
 			else { *this = DataTable(); }
 		}
 
-		//- returns the mean value of the dependent coordinate
+		/*! \return the mean value of the dependent coordinate */
 		T mean() const {
-			T mean;
-			mean = std::accumulate(begin(m_dataY), end(m_dataY), 0.0f) / m_numRecs;
+
+			T mean; // mean = sum / number of records
+			mean = std::accumulate(begin(m_dataY), end(m_dataY), 0.00f) / m_numRecs;
 			return mean;
 		}
 
-		//- returns the standard deviation of the dependent coordinates
+		/*! returns the standard deviation of the dependent coordinates */
 		T sigma() const {
-			T sigma;
+
+			T sigma; // ssd = √{ [ Σi(zi - zmean)2 ] / (n - 1) }
 
 			T diff_total = 0;
 			for (auto i : m_dataY) {
+				// [ Σi(zi - zmean)2 ] 
 				diff_total += pow((i - mean()), 2);
 			}
 
-			sigma = sqrt((diff_total) / (m_numRecs - 1));
+			// take square root of √{ [ Σi(zi - zmean)2 ] / (n - 1) }
+			sigma = sqrt(static_cast<float>(diff_total) / (m_numRecs - 1));
 
 			return sigma;
 		}
 
-		// - returns the median value of the dependent coordinate
+		/*! returns the median value of the dependent coordinate */
 		T median() const {
-			T median;
+
+			T median; // the middle number in the sorted set of the values 
+			// (that is, the value separating the lower and upper halves of the data in a sorted set)
+			
+			//make a copy vector to store sorted data 
 			std::vector <T> m_copyDataY = m_dataY;
 
+			//sort
 			sort(begin(m_copyDataY), end(m_copyDataY));
+
 			int index = -1;
+			// find the median
 			if (m_numRecs % 2 == 0) {
 				index = m_numRecs / 2;
 				median = m_copyDataY[index];
@@ -78,51 +118,59 @@ namespace w8 {
 				index = m_numRecs / 2;
 				median = m_copyDataY[index + 1];
 			}
-			return median;
+			return (median);
 		}
 
 		// - returns the slope and intercept for the data set
 		void regression(T& slope, T& y_intercept) const {
+
+			// slope       = [ n ( Σixiyi ) - Σixi Σiyi ] / [ n (Σixi2) - (Σixi)2 ]
+			// y_intercept = [ Σiyi - slope * Σixi ] / n
+
 			T sumOfXY = 0, sumOfX = 0, sumOfY = 0, sumOfX2 = 0;
 
 			sumOfX = std::accumulate(begin(m_dataX), end(m_dataX), sumOfX);
 			sumOfY = std::accumulate(begin(m_dataY), end(m_dataY), sumOfY);
-			sumOfX2 = std::accumulate(begin(m_dataX), end(m_dataX), sumOfX2, [](T total, T value) {return total += value*value; });
+			sumOfX2 = std::accumulate(begin(m_dataX), end(m_dataX), sumOfX2, [](T total, T value) { return total += value * value; });
 
 			std::vector <T> dataXY(m_numRecs);
+			// this vector store pair of X * Y values
 			std::transform(begin(m_dataX), end(m_dataX), begin(m_dataY), begin(dataXY),
 				std::multiplies<float>());
 
+			// sum of X * Y
 			sumOfXY = std::accumulate(begin(dataXY), end(dataXY), sumOfXY);
 
-			slope = (m_numRecs * sumOfXY - sumOfX* sumOfY) / (m_numRecs * sumOfX2 - pow(sumOfX, 2));
-			y_intercept = (sumOfY - slope*sumOfX) / m_numRecs;
+			//calculate using the formula
+			slope = (m_numRecs * sumOfXY - sumOfX * sumOfY) / (m_numRecs * sumOfX2 - pow(sumOfX, 2));
+			y_intercept = (sumOfY - slope * sumOfX) / m_numRecs;
 		}
 
-		// - displays the data pairs as shown below
+		/*! displays the data pairs as shown below */
 		void display(std::ostream& os) const {
 
-			//*** CRASH
+			os << std::setw(m_width) << "x";
+			os << std::setw(m_width) << "y" << std::endl;
+
 			for (int i = 0; i < m_numRecs; i++) {
-				os.setf(ios::fixed);
+				os.setf(std::ios::fixed);
 				os.precision(2);
-				os << m_dataX[i];
-			//	os std::<< "     "; //operator<< is ambiguous 
-				os << m_dataY[i];
-				os.unsetf(ios::fixed);
+				os << std::setw(m_width) << m_dataX[i];
+				os << std::setw(m_width) << m_dataY[i];
+				os.unsetf(std::ios::fixed);
 				os << std::endl;
 			}
 		}
 
+
+		/*! inserts the data generated by display() into the output stream */
+		friend std::ostream& operator<<(std::ostream& os, const DataTable& dt) {
+			dt.display(os);
+			return os;
+		}
 	};
 
-	template<typename DataTable>
-	//- inserts the data generated by display() into the output stream
-	std::ostream& operator<<(std::ostream& os, const DataTable& dt) {
-		dt.display(os);
-		return os;
-	}
-
 }
+
 
 #endif
