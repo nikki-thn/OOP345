@@ -27,19 +27,19 @@ CustomerOrder&& OrderManager::extract() {
 */
 void OrderManager::validate(const ItemManager& itemManager, std::ostream& os) {
 
-	for (auto &custOrder : *this) { //for every customerOrder in the vector
+	for (size_t i = 0; i < std::vector<CustomerOrder>::size(); i++) { //for every customerOrder in the vector
 
-		for (unsigned int i = 0; i < custOrder.noOrders(); i++) {
+		for (unsigned int j = 0; j < std::vector<CustomerOrder>::at(i).noOrders(); j++) {
 
 			//for every item in each customerOrder, return true if item is same as 
 			// an item on the customerOrder
 			auto pos = std::find_if(std::begin(itemManager), std::end(itemManager),
-				[&, this](Item item) { return custOrder[i] == item.getName(); });
+				[&, this](Item item) { return std::vector<CustomerOrder>::at(i)[j] == item.getName(); });
 
 
 			// if item is not found, print message
 			if (pos >= std::end(itemManager)) {
-				os << custOrder[i] << " is  unavailable" << std::endl;
+				os << std::vector<CustomerOrder>::at(i)[j] << " is  unavailable" << std::endl;
 			}
 		}
 	}
@@ -48,7 +48,8 @@ void OrderManager::validate(const ItemManager& itemManager, std::ostream& os) {
 /*! function will display all customerOrder in the vector */
 void OrderManager::display(std::ostream& os) const {
 
-	for (auto& custOrder : *this) {
-		custOrder.display(os);
+	for (size_t i = 0; i < std::vector<CustomerOrder>::size(); i++) {
+	//for (auto& custOrder : *this) {
+		std::vector<CustomerOrder>::at(i).display(os);
 	}
 }

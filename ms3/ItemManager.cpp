@@ -6,7 +6,8 @@
 */
 void ItemManager::display(std::ostream& os, bool insertDescription) const {
 
-	for (auto& item : *this) {
-		item.display(os, insertDescription);
+	//for (auto& item : *this) {
+	for (auto i = 0; i < std::vector<Item>::size(); i++){
+		std::vector<Item>::at(i).display(os, insertDescription);
 	}
 }
